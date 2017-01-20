@@ -49,7 +49,7 @@ namespace DeckTrackerCustom
                         ccbc[c.Cost] += c.Count;
                     else
                         ccbc.Add(c.Cost, c.Count);
-                }
+                } 
 
                 return ccbc;
             }
