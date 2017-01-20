@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\
+D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\
 DeckTrackerCustom
 none
 false
@@ -13,7 +13,7 @@ DEBUG;TRACE
 1-1781869656
 
 91637560329
-15422004695
+15-1560634979
 Views\MulliganOddsWindow.xaml;
 
 False

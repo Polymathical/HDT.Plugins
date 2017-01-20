@@ -30,7 +30,7 @@
                             </Grid.RowDefinitions>
                             <Border BorderBrush="{x:Null}" Width="32" Height="32">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="/MulliganTracker;component/Images/card-marker.png"/>
+                                    <ImageBrush ImageSource="/MulliganTracker;component/Images/mana-gem.png"/>
                                 </Border.Background>
                                 <TextBlock Grid.Column="0" FontSize="18" Foreground="White" FontWeight="Bold" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
