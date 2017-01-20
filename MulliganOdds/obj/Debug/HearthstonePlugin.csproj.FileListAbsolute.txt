@@ -1,0 +1,11 @@
+C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MulliganTracker\MulliganTracker.dll
+C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MulliganTracker\MulliganTracker.pdb
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\HearthstonePlugin.csprojResolveAssemblyReference.cache
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\Views\MulliganOddsWindow.g.cs
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker_MarkupCompile.cache
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker_MarkupCompile.lref
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\Views\MulliganOddsWindow.baml
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker.g.resources
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker.dll
+C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker.pdb
