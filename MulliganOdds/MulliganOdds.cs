@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using HearthDb.Enums;
 using System.ComponentModel;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace DeckTrackerCustom
 {
@@ -27,7 +28,7 @@ namespace DeckTrackerCustom
                 var eih = from e in Core.Game.Player.Hand where e.Info.CardMark != CardMark.Coin orderby e.GetTag(GameTag.ZONE_POSITION) select e;
 
                 if (eih.All(e => e.HasTag(GameTag.ZONE_POSITION)))
-                    eih = EntitiesInHand.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
+                    eih = eih.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
 
                 return eih;
             }
@@ -49,7 +50,7 @@ namespace DeckTrackerCustom
                         ccbc[c.Cost] += c.Count;
                     else
                         ccbc.Add(c.Cost, c.Count);
-                } 
+                }
 
                 return ccbc;
             }
@@ -145,19 +146,19 @@ namespace DeckTrackerCustom
             {
                 UpdateMulliganData();
             }
-            
+
 
             UpdateCardMetaData();
+
+            UpdateHandDamageCounter();
         }
+
+
+
 
         void UpdateMulliganData()
         {
-            var entitiesInHand = from e in Core.Game.Player.Hand where e.Info.CardMark != CardMark.Coin select e;
-
-            if (entitiesInHand.All(e => e.HasTag(GameTag.ZONE_POSITION)))
-                entitiesInHand = entitiesInHand.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
-
-            foreach (Entity e in entitiesInHand)
+            foreach (Entity e in EntitiesInHand)
             {
                 var c = e.Card;
 
@@ -172,6 +173,74 @@ namespace DeckTrackerCustom
 
                 MainWindowViewModel.MulliganCardOdds.Add(new MulliganOddsModel(lowerOdds, equalOdds, higherOdds));
             }
+        }
+
+        void UpdateHandDamageCounter()
+        {
+            if (Core.Game.Player.IsLocalPlayer == false)
+                return;
+
+            int sp = 0;
+            foreach (Entity e in Core.Game.Player.Board)
+            {
+                if (e.HasTag(GameTag.SPELLPOWER) == false)
+                    continue;
+
+                sp += e.GetTag(GameTag.SPELLPOWER);
+            }
+
+            int primaryDamage = 0;
+            int secondaryDamage = 0;
+
+            foreach (Entity e in EntitiesInHand)
+            {
+                if (_damageCards.Contains(e.CardId) == false)
+                    continue;
+
+                var c = e.Card;
+                var spellDamageInfo = GetCardDirectDamage(e);
+
+                if (spellDamageInfo == null)
+                    continue;
+
+                primaryDamage += spellDamageInfo.d1 + sp;
+                secondaryDamage += spellDamageInfo.d2 + sp;
+            }
+
+            MainWindowViewModel.ExtraInfo.Add("Spell Damage: " + primaryDamage + " (" + secondaryDamage + ")");
+        }
+
+        static string[] _damageCards = new string[]
+        {
+            HearthDb.CardIds.Collectible.Rogue.SinisterStrike,
+            HearthDb.CardIds.Collectible.Rogue.Eviscerate,
+            HearthDb.CardIds.Collectible.Rogue.JadeShuriken,
+            HearthDb.CardIds.Collectible.Rogue.Shiv
+        };
+
+        class SpellDamageInfo
+        {
+
+            public int d1 { get; set; }
+            public int d2 { get; set; }
+
+            public SpellDamageInfo(int damage, int altDamage)
+            {
+                d1 = damage;
+                d2 = altDamage;
+            }
+        }
+        SpellDamageInfo GetCardDirectDamage(Entity e)
+        {
+            if (e.CardId == HearthDb.CardIds.Collectible.Rogue.SinisterStrike)
+                return new SpellDamageInfo(3, 3);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.Eviscerate)
+                return new SpellDamageInfo(2, 4);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.JadeShuriken)
+                return new SpellDamageInfo(2, 2);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.Shiv)
+                return new SpellDamageInfo(1, 1);
+            return null;
         }
 
         private double DeckCostStats(int cost, ComparisonType comparisonType, bool countAsAddedBack = false)

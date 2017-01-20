@@ -10,9 +10,9 @@ namespace DeckTrackerCustom
 
         public MulliganOddsModel(double lowerOdds, double equalOdds, double higherOdds)
         {
-            lowerOdds = LowerOdds;
+            LowerOdds = lowerOdds;
             EqualOdds = equalOdds;
-            higherOdds = HigherOdds;
+            HigherOdds = higherOdds;
         }
     }
 }

@@ -71,6 +71,14 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <ItemsControl ItemsSource="{Binding ExtraInfo}" Height="Auto" Margin="0">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="16" FontFamily="Arial Black" Text="{Binding}"  Width="Auto" Margin="0,3,0,0">
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>
  

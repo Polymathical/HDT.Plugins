@@ -24,11 +24,14 @@ namespace DeckTrackerCustom
 
         public ObservableCollection<MulliganOddsModel> MulliganCardOdds { get; set; }
 
+        public ObservableCollection<string> ExtraInfo { get; set; }
+
         public WindowViewModel()
         {
             CardInfo = new ObservableCollection<CardModel>();
             CardTypeCount = new ObservableCollection<CardTypeCountModel>();
             MulliganCardOdds = new ObservableCollection<MulliganOddsModel>();
+            ExtraInfo = new ObservableCollection<string>();
 
             // Check for design mode. 
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
@@ -52,6 +55,7 @@ namespace DeckTrackerCustom
             CardInfo.Clear();
             CardTypeCount.Clear();
             MulliganCardOdds.Clear();
+            ExtraInfo.Clear();
         }
        
     }
