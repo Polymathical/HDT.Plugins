@@ -32,7 +32,7 @@
                                 <Border.Background>
                                     <ImageBrush ImageSource="/MulliganTracker;component/Images/mana-gem.png"/>
                                 </Border.Background>
-                                <TextBlock Grid.Column="0" FontSize="18" Foreground="White" FontWeight="Bold" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="0" FontSize="14" Foreground="White" FontWeight="Bold" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                             <TextBlock Grid.Column="1" FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" Text="{Binding CardDrawPercent, Converter={StaticResource DoubleToPercentTextValueConverter}, StringFormat=P0}" TextDecorations="{x:Null}" />
                             <TextBlock Grid.Column="2" FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" Text="{Binding CardDrawRunningTotal, Converter={StaticResource DoubleToPercentTextValueConverter}}" TextDecorations="{x:Null}" />
@@ -44,7 +44,7 @@
         <ItemsControl ItemsSource="{Binding CardTypeCount}" Height="Auto" Margin="0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock FontSize="16" FontFamily="Arial Black" Width="Auto" Margin="0,3,0,0">
+                    <TextBlock FontSize="14" FontFamily="Arial Black" Width="Auto" Margin="0,3,0,0">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}: {1} ({2})">
                                 <Binding Path="CardTypeName" />
@@ -59,7 +59,7 @@
         <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Margin="0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock FontSize="16" FontFamily="Arial Black" Width="Auto" Margin="0,3,0,0">
+                    <TextBlock FontSize="14" FontFamily="Arial Black" Width="Auto" Margin="0,3,0,0">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} - {1} - {2}">
                                 <Binding Path="LowerOdds"  Converter="{StaticResource DoubleToPercentTextValueConverter}" />
@@ -74,7 +74,7 @@
         <ItemsControl ItemsSource="{Binding ExtraInfo}" Height="Auto" Margin="0">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock FontSize="16" FontFamily="Arial Black" Text="{Binding}"  Width="Auto" Margin="0,3,0,0">
+                    <TextBlock FontSize="14" FontFamily="Arial Black" Text="{Binding}"  Width="Auto" Margin="0,3,0,0">
                     </TextBlock>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

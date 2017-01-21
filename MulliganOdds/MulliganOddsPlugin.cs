@@ -114,8 +114,14 @@ namespace DeckTrackerCustom
             else
             {
                 _cardInfoView.Show();
-              //  _mulliganOdds?.Update();
+                Wait(100);
+                _mulliganOdds?.Update();
             }
+        }
+
+        async void Wait(int ms)
+        {
+            await Task.Delay(ms);
         }
     }
 }
