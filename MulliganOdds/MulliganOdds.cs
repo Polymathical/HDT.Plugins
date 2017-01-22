@@ -46,6 +46,9 @@ namespace DeckTrackerCustom
 
                 foreach (Card c in CoreAPI.Game.Player.PlayerCardList)
                 {
+                    if (c.Count == 0)
+                        continue;
+
                     if (ccbc.ContainsKey(c.Cost))
                         ccbc[c.Cost] += c.Count;
                     else
@@ -191,7 +194,7 @@ namespace DeckTrackerCustom
 
             int primaryDamage = 0;
             int secondaryDamage = 0;
-
+            int cardCount = 0;
             foreach (Entity e in EntitiesInHand)
             {
                 if (_damageCards.Contains(e.CardId) == false)
@@ -202,12 +205,12 @@ namespace DeckTrackerCustom
 
                 if (spellDamageInfo == null)
                     continue;
-
+                cardCount++;
                 primaryDamage += spellDamageInfo.d1 + sp;
                 secondaryDamage += spellDamageInfo.d2 + sp;
             }
 
-            MainWindowViewModel.ExtraInfo.Add("Spell Damage: " + primaryDamage + " (" + secondaryDamage + ")");
+            MainWindowViewModel.ExtraInfo.Add("Spell Dmg: " + primaryDamage + " (" + secondaryDamage + ") (C" + cardCount + ")");
         }
 
         static string[] _damageCards = new string[]
