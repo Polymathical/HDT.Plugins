@@ -14,7 +14,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Text.RegularExpressions;
 
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
     public class MetaDataController
     {

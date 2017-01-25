@@ -1,5 +1,5 @@
 ﻿
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
 
     public class MulliganOddsModel

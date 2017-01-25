@@ -4,16 +4,14 @@ using Hearthstone_Deck_Tracker.API;
 using System;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.ComponentModel;
+using System.Windows.Media;
 
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
-    /// <summary>
-    ///  
-    /// </summary>
     public partial class MetaDataView : IDisposable
     {
         UIElement opponentPanel => Core.OverlayCanvas.FindName("BorderStackPanelOpponent") as UIElement;
-
+ 
         public MetaDataView(WindowViewModel vm) : base()
         {
             this.DataContext = vm;
@@ -33,7 +31,6 @@ namespace HDT.Plugins.MassiveDynamic
             var panelLeft = opponentPanel?.GetValue(Canvas.LeftProperty) as double?;
             var panelTop = opponentPanel?.GetValue(Canvas.TopProperty) as double?;
             var panelWidth = opponentPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
-            // Log.WriteLine("MulliganOdds: " + panelLeft + " " + panelTop + " " + panelWidth, LogType.Info);
 
             if (opponentPanel != null && panelLeft != null && panelTop is double)
             {

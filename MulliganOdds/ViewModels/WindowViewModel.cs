@@ -7,13 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
-using Hearthstone_Deck_Tracker;
-using HearthDb.Enums;
-using Hearthstone_Deck_Tracker.Hearthstone.Entities;
-using Hearthstone_Deck_Tracker.Enums;
 
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
 
     public class WindowViewModel

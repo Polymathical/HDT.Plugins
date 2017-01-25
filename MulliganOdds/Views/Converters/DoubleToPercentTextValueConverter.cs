@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
     public class DoubleToPercentTextValueConverter : IValueConverter
     {
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)

@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows;
 using Hearthstone_Deck_Tracker;
 
-namespace HDT.Plugins.MassiveDynamic
+namespace HDT.Plugins.Custom
 {
 
     public class MetaDataPlugin : IPlugin
@@ -90,7 +90,7 @@ namespace HDT.Plugins.MassiveDynamic
             GameEvents.OnPlayerDraw.Add(_mulliganOdds.PlayerDraw);
             GameEvents.OnPlayerMulligan.Add(_mulliganOdds.PlayerMulligan);
             GameEvents.OnGameEnd.Add(_mulliganOdds.GameEnd);
-          
+
         }
 
         public void OnUnload()
@@ -114,8 +114,8 @@ namespace HDT.Plugins.MassiveDynamic
             else
             {
                 _cardInfoView.Show();
-                Wait(100);
-                _mulliganOdds?.Update();
+                //Wait(100);
+               // _mulliganOdds?.Update();
             }
         }
 
