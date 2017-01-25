@@ -5,7 +5,7 @@ using System;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.ComponentModel;
 
-namespace DeckTrackerCustom
+namespace HDT.Plugins.MassiveDynamic
 {
     /// <summary>
     ///  

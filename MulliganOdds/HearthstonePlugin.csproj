@@ -7,8 +7,8 @@
     <ProjectGuid>{771CEB3E-6C81-4BD6-B05C-621DD4023F13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeckTrackerCustom</RootNamespace>
-    <AssemblyName>MulliganTracker</AssemblyName>
+    <RootNamespace>HDT.Plugins.MassiveDynamic</RootNamespace>
+    <AssemblyName>HDT.Plugins.MassiveDynamic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

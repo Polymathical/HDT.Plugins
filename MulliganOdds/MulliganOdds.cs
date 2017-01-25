@@ -14,7 +14,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Text.RegularExpressions;
 
-namespace DeckTrackerCustom
+namespace HDT.Plugins.MassiveDynamic
 {
     public class MulliganOdds
     {
@@ -150,14 +150,9 @@ namespace DeckTrackerCustom
                 UpdateMulliganData();
             }
 
-
             UpdateCardMetaData();
-
             UpdateHandDamageCounter();
         }
-
-
-
 
         void UpdateMulliganData()
         {

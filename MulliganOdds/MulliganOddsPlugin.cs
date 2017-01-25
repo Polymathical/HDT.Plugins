@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows;
 using Hearthstone_Deck_Tracker;
 
-namespace DeckTrackerCustom
+namespace HDT.Plugins.MassiveDynamic
 {
 
     public class MulliganOddsPlugin : IPlugin

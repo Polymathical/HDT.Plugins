@@ -1,20 +1,20 @@
-﻿MulliganTracker
+﻿HDT.Plugins.MassiveDynamic
 
 
 library
 C#
 .cs
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\
-DeckTrackerCustom
+HDT.Plugins.MassiveDynamic
 none
 false
 DEBUG;TRACE
 
 1-1781869656
 
-91637560329
+13-1168059591
 15-1560634979
 Views\MulliganOddsWindow.xaml;
 
-False
+True
 

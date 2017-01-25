@@ -1,4 +1,4 @@
-﻿MulliganTracker
+﻿HDT.Plugins.MassiveDynamic
 
 
 library
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 1-1781869656
 
-13-1168059591
+91637560329
 15-1560634979
 Views\MulliganOddsWindow.xaml;
 
-True
+False
 

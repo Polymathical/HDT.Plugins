@@ -1,6 +1,6 @@
 ﻿
 
-namespace DeckTrackerCustom
+namespace HDT.Plugins.MassiveDynamic
 {
     public class CardTypeCountModel
     {
