@@ -18,7 +18,10 @@ namespace HDT.Plugins.Custom
 {
     public class MetaDataController
     {
-        internal MetaDataView _dispControl;
+
+        #region Properties and Variables
+
+        internal MetaDataView _dispView;
         internal WindowViewModel MainWindowViewModel { get; set; }
 
         IEnumerable<Entity> EntitiesInHand
@@ -37,6 +40,9 @@ namespace HDT.Plugins.Custom
         enum ComparisonType { LessThan, LessThanEqual, Equal, GreaterThanEqual, GreaterThan };
 
         int DeckCardCount => CoreAPI.Game.Player.PlayerCardList.Select(c => c.Count).Sum();
+
+        bool ShouldHide { get { return Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu; } }
+
 
         IDictionary<int, int> DeckCardCountByCost
         {
@@ -59,21 +65,23 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        public MetaDataController(MetaDataView displayControl)
-        {
-            _dispControl = displayControl;
-            MainWindowViewModel = new WindowViewModel();
-            _dispControl.DataContext = MainWindowViewModel;
+        #endregion 
 
-            if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
-                _dispControl?.Hide();
+        public MetaDataController(MetaDataView displayView)
+        {
+            _dispView = displayView;
+            MainWindowViewModel = new WindowViewModel();
+            _dispView.DataContext = MainWindowViewModel;
+
+            if (ShouldHide)
+                _dispView?.Hide();
             else
-                _dispControl?.Show();
+                _dispView?.Show();
         }
 
         public void GameStart()
         {
-            _dispControl?.Show();
+            _dispView?.Show();
             UpdateCardInformation();
         }
 
@@ -84,24 +92,17 @@ namespace HDT.Plugins.Custom
 
         internal void Update()
         {
-            if (CoreAPI.Game.IsRunning)
-            {
-                UpdateCardInformation();
-            }
-            else
-                _dispControl?.Hide();
+            UpdateCardInformation();
         }
 
         internal void PlayerDraw(Card c)
         {
-            if (CoreAPI.Game.Player.IsLocalPlayer)
-                UpdateCardInformation();
+            UpdateCardInformation();
         }
 
         internal void GameEnd()
         {
-            if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
-                _dispControl?.Hide();
+            _dispView?.Hide();
         }
 
         internal void PlayerMulligan(Card c)

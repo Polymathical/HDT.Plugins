@@ -16,8 +16,8 @@ namespace HDT.Plugins.Custom
 
     public class MetaDataPlugin : IPlugin
     {
-        private MetaDataController _mulliganOdds;
-        private MetaDataView _cardInfoView;
+        private MetaDataController _metaDataPlugin;
+        private MetaDataView _metaDataView;
 
         public string Author
         {
@@ -55,7 +55,7 @@ namespace HDT.Plugins.Custom
         {
             get
             {
-                return "Mulligan Odds";
+                return "Card MetaData";
             }
         }
 
@@ -75,47 +75,49 @@ namespace HDT.Plugins.Custom
 
         public void OnLoad()
         {
-            _cardInfoView = new MetaDataView();
-            _mulliganOdds = new MetaDataController(_cardInfoView);
+            _metaDataView = new MetaDataView();
+            _metaDataPlugin = new MetaDataController(_metaDataView);
 
             if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
-                _cardInfoView.Hide();
+                _metaDataView.Hide();
             else
-                _cardInfoView.Show();
+                _metaDataView.Show();
 
-            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Add(_cardInfoView);
+            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Add(_metaDataView);
 
-            GameEvents.OnGameStart.Add(_mulliganOdds.GameStart);
-            GameEvents.OnTurnStart.Add(_mulliganOdds.TurnStart);
-            GameEvents.OnPlayerDraw.Add(_mulliganOdds.PlayerDraw);
-            GameEvents.OnPlayerMulligan.Add(_mulliganOdds.PlayerMulligan);
-            GameEvents.OnGameEnd.Add(_mulliganOdds.GameEnd);
+            GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
+            GameEvents.OnTurnStart.Add(_metaDataPlugin.TurnStart);
+            GameEvents.OnPlayerDraw.Add(_metaDataPlugin.PlayerDraw);
+            GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
+            GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
 
         }
 
         public void OnUnload()
         {
-            _cardInfoView.Hide();
-            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Remove(_cardInfoView);
-            _cardInfoView.Dispose();
+            _metaDataView.Hide();
+            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Remove(_metaDataView);
+            _metaDataView.Dispose();
 
-            _cardInfoView = null;
-            _mulliganOdds = null;
-            _cardInfoView = null;
+            _metaDataView = null;
+            _metaDataPlugin = null;
+            _metaDataView = null;
         }
 
         public void OnUpdate()
         {
             if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
             {
-                _cardInfoView.Hide();
+                _metaDataView.Hide();
                 return;
             }
             else
             {
-                _cardInfoView.Show();
-                //Wait(100);
-               // _mulliganOdds?.Update();
+                _metaDataView.Show();
+
+                // Will this create stacking waits? 
+                Wait(100);
+                _metaDataPlugin?.Update();
             }
         }
 
