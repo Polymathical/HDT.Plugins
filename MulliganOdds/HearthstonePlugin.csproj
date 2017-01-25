@@ -59,17 +59,17 @@
     <Compile Include="Models\CardModel.cs" />
     <Compile Include="Models\CardTypeCountModel.cs" />
     <Compile Include="Models\MulliganOddsModel.cs" />
-    <Compile Include="MulliganOddsPlugin.cs" />
-    <Compile Include="MulliganOdds.cs" />
+    <Compile Include="MetaDataPlugin.cs" />
+    <Compile Include="MetaDataController.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
-    <Compile Include="Views\DoubleToPercentTextValueConverter.cs" />
-    <Compile Include="Views\MulliganOddsWindow.xaml.cs">
-      <DependentUpon>MulliganOddsWindow.xaml</DependentUpon>
+    <Compile Include="Views\Converters\DoubleToPercentTextValueConverter.cs" />
+    <Compile Include="Views\MetaDataView.xaml.cs">
+      <DependentUpon>MetaDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\MulliganOddsWindow.xaml">
+    <Page Include="Views\MetaDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

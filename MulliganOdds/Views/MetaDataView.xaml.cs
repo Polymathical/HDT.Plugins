@@ -10,16 +10,16 @@ namespace HDT.Plugins.MassiveDynamic
     /// <summary>
     ///  
     /// </summary>
-    public partial class MulliganOddsWindow : IDisposable
+    public partial class MetaDataView : IDisposable
     {
         UIElement opponentPanel => Core.OverlayCanvas.FindName("BorderStackPanelOpponent") as UIElement;
 
-        public MulliganOddsWindow(WindowViewModel vm) : base()
+        public MetaDataView(WindowViewModel vm) : base()
         {
             this.DataContext = vm;
         }
 
-        public MulliganOddsWindow()
+        public MetaDataView()
         {
             InitializeComponent();
 

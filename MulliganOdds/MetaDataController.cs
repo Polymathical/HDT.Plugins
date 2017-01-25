@@ -16,9 +16,9 @@ using System.Text.RegularExpressions;
 
 namespace HDT.Plugins.MassiveDynamic
 {
-    public class MulliganOdds
+    public class MetaDataController
     {
-        internal MulliganOddsWindow _dispControl;
+        internal MetaDataView _dispControl;
         internal WindowViewModel MainWindowViewModel { get; set; }
 
         IEnumerable<Entity> EntitiesInHand
@@ -59,7 +59,7 @@ namespace HDT.Plugins.MassiveDynamic
             }
         }
 
-        public MulliganOdds(MulliganOddsWindow displayControl)
+        public MetaDataController(MetaDataView displayControl)
         {
             _dispControl = displayControl;
             MainWindowViewModel = new WindowViewModel();

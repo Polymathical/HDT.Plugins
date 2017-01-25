@@ -14,10 +14,10 @@ using Hearthstone_Deck_Tracker;
 namespace HDT.Plugins.MassiveDynamic
 {
 
-    public class MulliganOddsPlugin : IPlugin
+    public class MetaDataPlugin : IPlugin
     {
-        private MulliganOdds _mulliganOdds;
-        private MulliganOddsWindow _cardInfoView;
+        private MetaDataController _mulliganOdds;
+        private MetaDataView _cardInfoView;
 
         public string Author
         {
@@ -67,7 +67,7 @@ namespace HDT.Plugins.MassiveDynamic
         {
             get
             {
-                return Assembly.GetAssembly(typeof(MulliganOddsPlugin)).GetName().Version;
+                return Assembly.GetAssembly(typeof(MetaDataPlugin)).GetName().Version;
             }
         }
 
@@ -75,8 +75,8 @@ namespace HDT.Plugins.MassiveDynamic
 
         public void OnLoad()
         {
-            _cardInfoView = new MulliganOddsWindow();
-            _mulliganOdds = new MulliganOdds(_cardInfoView);
+            _cardInfoView = new MetaDataView();
+            _mulliganOdds = new MetaDataController(_cardInfoView);
 
             if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
                 _cardInfoView.Hide();

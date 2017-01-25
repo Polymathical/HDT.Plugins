@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:HDT.Plugins.MassiveDynamic"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        mc:Ignorable="d" x:Class="HDT.Plugins.MassiveDynamic.MulliganOddsWindow"
+        mc:Ignorable="d" x:Class="HDT.Plugins.MassiveDynamic.MetaDataView"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:hdt="clr-namespace:Hearthstone_Deck_Tracker;assembly=HearthstoneDeckTracker"
         Width="180" Height="Auto" 
