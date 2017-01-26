@@ -44,6 +44,7 @@ namespace HDT.Plugins.Custom
 
         bool ShouldHide { get { return Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu; } }
 
+        List<Card> PlayerCardList => CoreAPI.Game.Player.PlayerCardList;
 
         IDictionary<int, int> DeckCardCountByCost
         {
@@ -51,7 +52,7 @@ namespace HDT.Plugins.Custom
             {
                 var ccbc = new SortedDictionary<int, int>();
 
-                foreach (Card c in CoreAPI.Game.Player.PlayerCardList)
+                foreach (Card c in PlayerCardList)
                 {
                     if (c.Count == 0)
                         continue;
@@ -79,6 +80,8 @@ namespace HDT.Plugins.Custom
             else
                 _dispView?.Show();
         }
+
+
 
         public void GameStart()
         {
@@ -139,6 +142,7 @@ namespace HDT.Plugins.Custom
         public void UpdateCardInformation()
         {
             MainWindowViewModel.Clear();
+            //todo: Update only items changed instead of clearing
 
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)

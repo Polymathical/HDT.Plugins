@@ -48,8 +48,8 @@
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}: {1} ({2})">
                                 <Binding Path="CardTypeName" />
-                                <Binding Path="CardCount" />
-                                <Binding Path="CardCountPercent" Converter="{StaticResource DoubleToPercentTextValueConverter}" />
+                                <Binding Path="CardTypeCount" />
+                                <Binding Path="CardCountPercent" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>

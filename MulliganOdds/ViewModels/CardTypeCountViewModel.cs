@@ -1,6 +1,7 @@
 ﻿using HDT.Plugins.Custom.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace HDT.Plugins.Custom.ViewModels
 {
     public class CardTypeCountViewModel : ViewModelBase
     {
-        private string _cardTypeName;
+        private string _cardTypeName = String.Empty;
         private int _cardTypeCount;
         private int _deckCardCount;
 
@@ -35,7 +36,19 @@ namespace HDT.Plugins.Custom.ViewModels
         }
 
 
-        public double CardCountPercent { get { return CardTypeCount / (double)DeckCardCount; } }
+        public string CardCountPercent
+        {
+            get
+            {
+                var cardCountPercent = CardTypeCount / (double)DeckCardCount;
+
+                var nfi = new NumberFormatInfo();
+                nfi.PercentDecimalDigits = 0;
+                nfi.PercentPositivePattern = 1;
+
+                return String.Format(nfi, "{0:P}", cardCountPercent);
+            }
+        }
 
         public CardTypeCountViewModel(string cardTypeName, int cardCount, int deckCardCount)
         {
