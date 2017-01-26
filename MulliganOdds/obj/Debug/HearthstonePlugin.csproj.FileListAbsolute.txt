@@ -19,3 +19,4 @@ D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker.dll
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker.pdb
 C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MetaDataTracker\MetaDataTracker.dll
 C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MetaDataTracker\MetaDataTracker.pdb
+D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\HearthstonePlugin.csprojResolveAssemblyReference.cache

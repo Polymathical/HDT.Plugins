@@ -60,9 +60,13 @@
   <ItemGroup>
     <Compile Include="Models\CardModel.cs" />
     <Compile Include="Models\CardTypeCountModel.cs" />
+    <Compile Include="ViewModels\CardViewModel.cs" />
+    <Compile Include="ViewModels\MulliganOddsViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Models\MulliganOddsModel.cs" />
     <Compile Include="MetaDataPlugin.cs" />
     <Compile Include="MetaDataController.cs" />
+    <Compile Include="ViewModels\CardTypeCountViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Converters\DoubleToPercentTextValueConverter.cs" />
     <Compile Include="Views\MetaDataView.xaml.cs">

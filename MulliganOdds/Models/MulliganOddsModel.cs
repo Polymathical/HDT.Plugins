@@ -1,5 +1,5 @@
 ﻿
-namespace HDT.Plugins.Custom
+namespace HDT.Plugins.Custom.Models
 {
 
     public class MulliganOddsModel

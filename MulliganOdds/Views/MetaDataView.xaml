@@ -19,7 +19,6 @@
         <ItemsControl x:Name="ViewItems" ItemsSource="{Binding CardInfo}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -38,7 +37,7 @@
                             <TextBlock Grid.Column="1" FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" Text="{Binding CardDrawPercent, Converter={StaticResource DoubleToPercentTextValueConverter}, StringFormat=P0}" TextDecorations="{x:Null}" />
                             <TextBlock Grid.Column="2" FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" Text="{Binding CardDrawRunningTotal, Converter={StaticResource DoubleToPercentTextValueConverter}}" TextDecorations="{x:Null}" />
                         </Grid>
-                    </StackPanel>
+ 
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

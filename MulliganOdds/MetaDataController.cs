@@ -13,6 +13,7 @@ using HearthDb.Enums;
 using System.ComponentModel;
 using System.Windows;
 using System.Text.RegularExpressions;
+using HDT.Plugins.Custom.Models;
 
 namespace HDT.Plugins.Custom
 {
@@ -128,8 +129,11 @@ namespace HDT.Plugins.Custom
                 }
             }
 
-            MainWindowViewModel.CardTypeCount.Add(new CardTypeCountModel("Spells", spellCount, DeckCardCount));
-            MainWindowViewModel.CardTypeCount.Add(new CardTypeCountModel("Minions", mininionCount, DeckCardCount));
+            var spellModel = new CardTypeCountModel("Spells", spellCount, DeckCardCount);
+            var minionModel = new CardTypeCountModel("Minions", mininionCount, DeckCardCount);
+
+            MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(spellModel));
+            MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(minionModel));
         }
 
         public void UpdateCardInformation()
@@ -142,7 +146,8 @@ namespace HDT.Plugins.Custom
                 var equalOdds = DeckCostStats(kv.Key, ComparisonType.Equal, false) / DeckCardCount;
                 runningTotal += equalOdds;
 
-                MainWindowViewModel.CardInfo.Add(new CardModel(kv.Key, equalOdds, runningTotal));
+                var cm = new CardModel(kv.Key, equalOdds, runningTotal);
+                MainWindowViewModel.CardInfo.Add(new ViewModels.CardViewModel(cm));
 
             }
 
@@ -170,7 +175,8 @@ namespace HDT.Plugins.Custom
                 var lowerEqualOdds = DeckCostStats(c.Cost, ComparisonType.LessThanEqual) / cardsAfterReshuffle;
                 var higherEqualOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThanEqual) / cardsAfterReshuffle;
 
-                MainWindowViewModel.MulliganCardOdds.Add(new MulliganOddsModel(lowerOdds, equalOdds, higherOdds));
+                var mom = new MulliganOddsModel(lowerOdds, equalOdds, higherOdds);
+                MainWindowViewModel.MulliganCardOdds.Add(new ViewModels.MulliganOddsViewModel(mom));
             }
         }
 
