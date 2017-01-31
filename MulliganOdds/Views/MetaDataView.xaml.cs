@@ -5,6 +5,7 @@ using System;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.ComponentModel;
 using System.Windows.Media;
+using HDT.Plugins.Custom.ViewModels;
 
 namespace HDT.Plugins.Custom
 {
@@ -20,6 +21,8 @@ namespace HDT.Plugins.Custom
         public MetaDataView()
         {
             InitializeComponent();
+
+            this.DataContext = new WindowViewModel();
 
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(opponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(opponentPanel, UpdatePosition);

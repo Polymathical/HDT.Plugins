@@ -9,40 +9,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace HDT.Plugins.Custom
+namespace HDT.Plugins.Custom.ViewModels
 {
 
     public class WindowViewModel
     {
-        public ObservableCollection<CardViewModel> CardInfo { get; set; }
+        public ObservableCollection<CardViewModel> CardInfo { get; set; } = new ObservableCollection<CardViewModel>();
 
-        public ObservableCollection<CardTypeCountViewModel> CardTypeCount { get; set; }
+        public ObservableCollection<CardTypeCountViewModel> CardTypeCount { get; set; } = new ObservableCollection<CardTypeCountViewModel>();
 
-        public ObservableCollection<MulliganOddsViewModel> MulliganCardOdds { get; set; }
+        public ObservableCollection<MulliganOddsViewModel> MulliganCardOdds { get; set; } = new ObservableCollection<MulliganOddsViewModel>();
 
-        public ObservableCollection<string> ExtraInfo { get; set; }
+        public ObservableCollection<string> ExtraInfo { get; set; } = new ObservableCollection<string>();
 
         public WindowViewModel()
         {
-            CardInfo = new ObservableCollection<CardViewModel>();
-            CardTypeCount = new ObservableCollection<CardTypeCountViewModel>();
-            MulliganCardOdds = new ObservableCollection<MulliganOddsViewModel>();
-            ExtraInfo = new ObservableCollection<string>();
 
             // Check for design mode. 
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    CardInfo.Add(new CardViewModel(i, 0.5, 0.75));
+                    CardInfo.Add(new CardViewModel(i, "0.5", "0.75"));
                 }
                 CardTypeCount.Add(new CardTypeCountViewModel("Spell", 8, 30));
                 CardTypeCount.Add(new CardTypeCountViewModel("Minions", 16, 30));
 
-                MulliganCardOdds.Add(new MulliganOddsViewModel(0.2, 0.4, 0.6));
-                MulliganCardOdds.Add(new MulliganOddsViewModel(0.2, 0.4, 0.6));
-                MulliganCardOdds.Add(new MulliganOddsViewModel(0.2, 0.4, 0.6));
-                MulliganCardOdds.Add(new MulliganOddsViewModel(0.2, 0.4, 0.6));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
+
+
+                ExtraInfo.Add("Extra Line 1");
+                ExtraInfo.Add("Extra Line 2");
             }
         }
 
@@ -53,7 +53,7 @@ namespace HDT.Plugins.Custom
             MulliganCardOdds.Clear();
             ExtraInfo.Clear();
         }
-       
+
     }
 }
 

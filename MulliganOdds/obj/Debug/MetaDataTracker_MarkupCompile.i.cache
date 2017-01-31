@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-11803395882
+5-1525313438
 
-17-2134809700
+22-2140572598
 15-1560634979
-Views\MetaDataView.xaml;
+Controls\CardTypeCountView.xaml;Controls\ExtraInfoView.xaml;Controls\MulliganOddsView.xaml;Controls\CardInfoView.xaml;Views\MetaDataView.xaml;
 
 True
 

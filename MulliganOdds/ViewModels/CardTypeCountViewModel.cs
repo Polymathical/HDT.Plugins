@@ -11,9 +11,8 @@ namespace HDT.Plugins.Custom.ViewModels
     public class CardTypeCountViewModel : ViewModelBase
     {
         private string _cardTypeName = String.Empty;
-        private int _cardTypeCount;
-        private int _deckCardCount;
-
+        private int _cardTypeCount = 0;
+        private int _deckCardCount = 0;
         public string CardTypeName { get { return _cardTypeName; } set { Set(ref _cardTypeName, value); } }
 
         public int CardTypeCount

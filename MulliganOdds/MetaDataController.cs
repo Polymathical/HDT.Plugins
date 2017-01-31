@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Text.RegularExpressions;
 using HDT.Plugins.Custom.Models;
+using HDT.Plugins.Custom.ViewModels;
 
 namespace HDT.Plugins.Custom
 {
@@ -137,7 +138,7 @@ namespace HDT.Plugins.Custom
 
             MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(spellModel));
             MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(minionModel));
-        }
+        }   
 
         public void UpdateCardInformation()
         {
@@ -150,8 +151,8 @@ namespace HDT.Plugins.Custom
                 var equalOdds = DeckCostStats(kv.Key, ComparisonType.Equal, false) / DeckCardCount;
                 runningTotal += equalOdds;
 
-                var cm = new CardModel(kv.Key, equalOdds, runningTotal);
-                MainWindowViewModel.CardInfo.Add(new ViewModels.CardViewModel(cm));
+                var cm = new CardInfoModel(kv.Key, equalOdds, runningTotal);
+                MainWindowViewModel.CardInfo.Add(new CardViewModel(cm));
 
             }
 
