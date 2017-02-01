@@ -27,3 +27,4 @@ D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\Views\MetaDataView.baml
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker.g.resources
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker.dll
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker.pdb
+D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\HearthstonePlugin.csprojResolveAssemblyReference.cache

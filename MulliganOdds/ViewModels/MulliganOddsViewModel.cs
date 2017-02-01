@@ -26,9 +26,9 @@ namespace HDT.Plugins.Custom.ViewModels
 
         public MulliganOddsViewModel(MulliganOddsModel m)
         {
-            LowerOdds = String.Format("{0:P0}", m.LowerOdds);
-            EqualOdds = String.Format("{0:P0}", m.EqualOdds);
-            HigherOdds = String.Format("{0:P0}", m.HigherOdds);
+            LowerOdds = Helpers.ToPercentString(m.LowerOdds);
+            EqualOdds = Helpers.ToPercentString(m.EqualOdds);
+            HigherOdds = Helpers.ToPercentString(m.HigherOdds);
         }
     }
 }

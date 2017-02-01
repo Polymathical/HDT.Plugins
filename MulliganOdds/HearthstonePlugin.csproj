@@ -70,6 +70,7 @@
     <Compile Include="Controls\CardInfoView.xaml.cs">
       <DependentUpon>CardInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Models\CardInfoModel.cs" />
     <Compile Include="Models\CardTypeCountModel.cs" />
     <Compile Include="ViewModels\CardInfoViewModel.cs" />

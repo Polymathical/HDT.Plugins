@@ -29,8 +29,8 @@ namespace HDT.Plugins.Custom.ViewModels
         public CardViewModel(CardInfoModel m)
         {
             CardCost = m.CardCost;
-            CardDrawPercent = String.Format("{0:P0}", m.CardDrawPercent);
-            CardDrawRunningTotal = String.Format("{0:P0}", m.CardDrawRunningTotal);
+            CardDrawPercent = Helpers.ToPercentString(m.CardDrawPercent);
+            CardDrawRunningTotal = Helpers.ToPercentString(m.CardDrawRunningTotal);
         }
 
         public CardViewModel()
