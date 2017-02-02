@@ -58,16 +58,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CardTypeCountView.xaml.cs">
+    <Compile Include="Views\CardTypeCountView.xaml.cs">
       <DependentUpon>CardTypeCountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExtraInfoView.xaml.cs">
+    <Compile Include="Views\ExtraInfoView.xaml.cs">
       <DependentUpon>ExtraInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MulliganOddsView.xaml.cs">
+    <Compile Include="Views\MulliganOddsView.xaml.cs">
       <DependentUpon>MulliganOddsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CardInfoView.xaml.cs">
+    <Compile Include="Views\CardInfoView.xaml.cs">
       <DependentUpon>CardInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
@@ -89,19 +89,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\CardTypeCountView.xaml">
+    <Page Include="Views\CardTypeCountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ExtraInfoView.xaml">
+    <Page Include="Views\ExtraInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MulliganOddsView.xaml">
+    <Page Include="Views\MulliganOddsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CardInfoView.xaml">
+    <Page Include="Views\CardInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,7 +120,9 @@
   <ItemGroup>
     <Resource Include="Images\mana-gem.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

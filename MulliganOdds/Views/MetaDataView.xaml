@@ -18,9 +18,8 @@
         <vm:WindowViewModel/>
     </UserControl.DataContext>
     <StackPanel Height="Auto">
-        <cc:CardInfoView DataContext="{Binding CardInfo}"></cc:CardInfoView>
+        <cc:CardInfoView DataContext="{Binding CardInfo}" FontWeight="Bold"/>
         <cc:CardTypeCountView DataContext="{Binding CardTypeCount}" />
-        <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}"/>
         <cc:ExtraInfoView DataContext="{Binding ExtraInfo}" />
     </StackPanel>
 </UserControl>
