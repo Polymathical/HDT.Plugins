@@ -30,15 +30,15 @@ namespace HDT.Plugins.Custom.ViewModels
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    CardInfo.Add(new CardViewModel(i, "0.5", "0.75"));
+                    CardInfo.Add(new CardViewModel(i, "50%", "75%"));
                 }
                 CardTypeCount.Add(new CardTypeCountViewModel("Spell", 8, 30));
                 CardTypeCount.Add(new CardTypeCountViewModel("Minions", 16, 30));
 
-                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("0.2", "0.4", "0.6"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
 
 
                 ExtraInfo.Add("Extra Line 1");

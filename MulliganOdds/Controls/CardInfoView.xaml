@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ItemsControl x:Name="ViewItems" ItemsSource="{Binding}">
+    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT" ItemsSource="{Binding}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Grid>
@@ -24,10 +24,10 @@
                         <Border.Background>
                             <ImageBrush ImageSource="/MetaDataTracker;component/Images/mana-gem.png"/>
                         </Border.Background>
-                        <TextBlock Grid.Column="0" FontSize="14" Foreground="White" FontWeight="Bold" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="0"  Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
-                    <TextBlock Grid.Column="1" Text="{Binding CardDrawPercent}"  FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
-                    <TextBlock Grid.Column="2" Text="{Binding CardDrawRunningTotal}" FontSize="16" Foreground="Yellow" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
+                    <TextBlock Grid.Column="1" Text="{Binding CardDrawPercent}"   VerticalAlignment="Center" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
+                    <TextBlock Grid.Column="2" Text="{Binding CardDrawRunningTotal}"   VerticalAlignment="Center" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
                 </Grid>
             </DataTemplate>
         </ItemsControl.ItemTemplate>

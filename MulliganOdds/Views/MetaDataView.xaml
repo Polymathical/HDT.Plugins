@@ -8,9 +8,12 @@
         x:Class="HDT.Plugins.Custom.MetaDataView"
         xmlns:cc="clr-namespace:HDT.Plugins.Custom.Controls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:vm="clr-namespace:HDT.Plugins.Custom.ViewModels"
         Width="180" Height="Auto"
-       xmlns:vm="clr-namespace:HDT.Plugins.Custom.ViewModels"
-        x:Name="DisplayList" BorderBrush="Gray" BorderThickness="2" LayoutUpdated="DisplayList_LayoutUpdated" Background="DarkGray">
+        x:Name="DisplayList" BorderBrush="Gray" BorderThickness="2" LayoutUpdated="DisplayList_LayoutUpdated">
+    <UserControl.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+    </UserControl.Background>
     <UserControl.DataContext>
         <vm:WindowViewModel/>
     </UserControl.DataContext>
