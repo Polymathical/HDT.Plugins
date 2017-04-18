@@ -21,6 +21,7 @@
         <cc:CardInfoView DataContext="{Binding CardInfo}" FontWeight="Bold"/>
         <cc:CardTypeCountView DataContext="{Binding CardTypeCount}" />
         <cc:ExtraInfoView DataContext="{Binding ExtraInfo}" />
+        <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}" /> 
     </StackPanel>
 </UserControl>
  

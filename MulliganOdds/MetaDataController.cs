@@ -239,6 +239,11 @@ namespace HDT.Plugins.Custom
                 d1 = damage;
                 d2 = altDamage;
             }
+
+            public SpellDamageInfo(int damage)
+            {
+                d1 = d2 = damage;
+            }
         }
         SpellDamageInfo GetCardDirectDamage(Entity e)
         {
@@ -247,9 +252,15 @@ namespace HDT.Plugins.Custom
             else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.Eviscerate)
                 return new SpellDamageInfo(2, 4);
             else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.JadeShuriken)
-                return new SpellDamageInfo(2, 2);
+                return new SpellDamageInfo(2);
             else if (e.CardId == HearthDb.CardIds.Collectible.Rogue.Shiv)
-                return new SpellDamageInfo(1, 1);
+                return new SpellDamageInfo(1);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Mage.Fireball)
+                return new SpellDamageInfo(6);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Mage.Pyroblast)
+                return new SpellDamageInfo(10);
+            else if (e.CardId == HearthDb.CardIds.Collectible.Mage.Frostbolt)
+                return new SpellDamageInfo(3);
             return null;
         }
 

@@ -9,8 +9,6 @@ C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker.dll
 C:\Code\DeckTrackerPlugins\MulliganOdds\obj\Debug\MulliganTracker.pdb
 C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MulliganTracker\MetaDataTracker.dll
 C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MulliganTracker\MetaDataTracker.pdb
-C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MetaDataTracker\MetaDataTracker.dll
-C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MetaDataTracker\MetaDataTracker.pdb
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\Views\MetaDataView.g.cs
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Code\HDT.Plugins\MulliganOdds\obj\Debug\MetaDataTracker_MarkupCompile.cache
