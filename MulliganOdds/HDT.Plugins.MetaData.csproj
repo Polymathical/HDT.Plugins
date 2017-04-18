@@ -110,13 +110,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HearthDb\HearthDb\HearthDb.csproj">
-      <Project>{7ed14243-e02b-4b94-af00-a67a62c282f0}</Project>
-      <Name>HearthDb</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\mana-gem.png" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +118,16 @@
   <ItemGroup>
     <Content Include="NewPreBuildEvent.txt" />
     <Content Include="OriginalPreBuildEvent.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hearthstone-Deck-Tracker\HearthDb\HearthDb\HearthDb.csproj">
+      <Project>{7ed14243-e02b-4b94-af00-a67a62c282f0}</Project>
+      <Name>HearthDb</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

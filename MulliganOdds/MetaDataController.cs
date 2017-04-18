@@ -213,8 +213,8 @@ namespace HDT.Plugins.Custom
                 if (spellDamageInfo == null)
                     continue;
                 cardCount++;
-                primaryDamage += spellDamageInfo.d1 + sp;
-                secondaryDamage += spellDamageInfo.d2 + sp;
+                primaryDamage += spellDamageInfo.PrimaryDamage + sp;
+                secondaryDamage += spellDamageInfo.SecondaryDamage + sp;
             }
 
             MainWindowViewModel.ExtraInfo.Add("Spell Dmg: " + primaryDamage + " (" + secondaryDamage + ") (C" + cardCount + ")");
@@ -231,18 +231,18 @@ namespace HDT.Plugins.Custom
         class SpellDamageInfo
         {
 
-            public int d1 { get; set; }
-            public int d2 { get; set; }
+            public int PrimaryDamage { get; set; }
+            public int SecondaryDamage { get; set; }
 
             public SpellDamageInfo(int damage, int altDamage)
             {
-                d1 = damage;
-                d2 = altDamage;
+                PrimaryDamage = damage;
+                SecondaryDamage = altDamage;
             }
 
             public SpellDamageInfo(int damage)
             {
-                d1 = d2 = damage;
+                PrimaryDamage = SecondaryDamage = damage;
             }
         }
         SpellDamageInfo GetCardDirectDamage(Entity e)
