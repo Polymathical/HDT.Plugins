@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDT.Plugins.MetaData", "MulliganOdds\HDT.Plugins.MetaData.csproj", "{771CEB3E-6C81-4BD6-B05C-621DD4023F13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDT.Plugins.MetaData", "MetaDataPlugin\HDT.Plugins.MetaData.csproj", "{771CEB3E-6C81-4BD6-B05C-621DD4023F13}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E63A3F1C-E662-4E62-BE43-AF27CB9E953D} = {E63A3F1C-E662-4E62-BE43-AF27CB9E953D}
 	EndProjectSection

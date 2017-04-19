@@ -116,10 +116,6 @@
     <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NewPreBuildEvent.txt" />
-    <Content Include="OriginalPreBuildEvent.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
