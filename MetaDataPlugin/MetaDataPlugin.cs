@@ -10,6 +10,7 @@ using Hearthstone_Deck_Tracker.API;
 using System.Windows.Controls;
 using System.Windows;
 using Hearthstone_Deck_Tracker;
+using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 
 namespace HDT.Plugins.Custom
 {
@@ -71,7 +72,7 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        public object CoreAPI { get; private set; }
+        //public object CoreAPI { get; private set; }
 
         public void OnLoad()
         {
@@ -83,7 +84,7 @@ namespace HDT.Plugins.Custom
             else
                 _metaDataView.Show();
 
-            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Add(_metaDataView);
+            CoreAPI.OverlayCanvas.Children.Add(_metaDataView);
 
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnTurnStart.Add(_metaDataPlugin.TurnStart);
@@ -96,7 +97,7 @@ namespace HDT.Plugins.Custom
         public void OnUnload()
         {
             _metaDataView.Hide();
-            Hearthstone_Deck_Tracker.API.Core.OverlayCanvas.Children.Remove(_metaDataView);
+          CoreAPI.OverlayCanvas.Children.Remove(_metaDataView);
             _metaDataView.Dispose();
 
             _metaDataView = null;
@@ -106,7 +107,7 @@ namespace HDT.Plugins.Custom
 
         public void OnUpdate()
         {
-            if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
+            if (Config.Instance.HideInMenu &&  CoreAPI.Game.IsInMenu)
             {
                 _metaDataView.Hide();
                 return;

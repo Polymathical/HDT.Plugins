@@ -30,7 +30,7 @@ namespace HDT.Plugins.Custom
         {
             get
             {
-                var eih = from e in Core.Game.Player.Hand where e.Info.CardMark != CardMark.Coin orderby e.GetTag(GameTag.ZONE_POSITION) select e;
+                var eih = from e in CoreAPI.Game.Player.Hand where e.Info.CardMark != CardMark.Coin orderby e.GetTag(GameTag.ZONE_POSITION) select e;
 
                 if (eih.All(e => e.HasTag(GameTag.ZONE_POSITION)))
                     eih = eih.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
@@ -156,7 +156,7 @@ namespace HDT.Plugins.Custom
 
             }
 
-            if (Core.Game.IsMulliganDone == false)
+            if (CoreAPI.Game.IsMulliganDone == false)
             {
                 UpdateMulliganData();
             }
@@ -187,11 +187,11 @@ namespace HDT.Plugins.Custom
 
         void UpdateHandDamageCounter()
         {
-            if (Core.Game.Player.IsLocalPlayer == false)
+            if (CoreAPI.Game.Player.IsLocalPlayer == false)
                 return;
 
             int sp = 0;
-            foreach (Entity e in Core.Game.Player.Board)
+            foreach (Entity e in CoreAPI.Game.Player.Board)
             {
                 if (e.HasTag(GameTag.SPELLPOWER) == false)
                     continue;
