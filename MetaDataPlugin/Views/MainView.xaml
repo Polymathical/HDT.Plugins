@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
-        x:Class="HDT.Plugins.Custom.MetaDataView"
+        x:Class="HDT.Plugins.Custom.MainView"
         xmlns:cc="clr-namespace:HDT.Plugins.Custom.Controls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="clr-namespace:HDT.Plugins.Custom.ViewModels"
@@ -15,7 +15,7 @@
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
     </UserControl.Background>
     <UserControl.DataContext>
-        <vm:WindowViewModel/>
+        <vm:MainViewModel/>
     </UserControl.DataContext>
     <StackPanel Height="Auto">
         <cc:CardInfoView DataContext="{Binding CardInfo}" FontWeight="Bold" />
@@ -24,6 +24,7 @@
         <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}" />
         <cc:QuestProgress DataContext="{Binding LocalPlayerQuestProgress}" />
         <cc:QuestProgress DataContext="{Binding OpponentQuestProgress}" />
+        <cc:ExtraInfoView DataContext="{Binding QuestTriggersList}" />
     </StackPanel>
 </UserControl>
  

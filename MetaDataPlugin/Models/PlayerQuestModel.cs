@@ -12,6 +12,8 @@ namespace HDT.Plugins.Custom.Models
         public int Progress { get; set; }
         public int Goal { get; set; }
 
+        public PlayerQuestModel() { }
+
         public PlayerQuestModel(string questName, int progress, int goal)
         {
             QuestName = questName;

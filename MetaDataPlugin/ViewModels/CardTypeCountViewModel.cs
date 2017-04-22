@@ -13,25 +13,22 @@ namespace HDT.Plugins.Custom.ViewModels
         private string _cardTypeName = String.Empty;
         private int _cardTypeCount = 0;
         private int _deckCardCount = 0;
-        public string CardTypeName { get { return _cardTypeName; } set { Set(ref _cardTypeName, value); } }
+
+        public string CardTypeName
+        {
+            get { return _cardTypeName; }
+            set { Set(ref _cardTypeName, value, nameof(CardTypeName)); }
+        }
 
         public int CardTypeCount
         {
             get { return _cardTypeCount; }
-            set
-            {
-                if (Set(ref _cardTypeCount, value))
-                    RaiseChange(nameof(CardCountPercent));
-            }
+            set { if (Set(ref _cardTypeCount, value)) RaiseChange(nameof(CardTypeCount)); }
         }
         public int DeckCardCount
         {
             get { return _deckCardCount; }
-            set
-            {
-                if (Set(ref _deckCardCount, value))
-                    RaiseChange(nameof(CardCountPercent));
-            }
+            set { if (Set(ref _deckCardCount, value)) RaiseChange(nameof(DeckCardCount)); }
         }
 
 
