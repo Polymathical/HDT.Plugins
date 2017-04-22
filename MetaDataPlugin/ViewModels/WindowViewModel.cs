@@ -22,6 +22,9 @@ namespace HDT.Plugins.Custom.ViewModels
 
         public ObservableCollection<string> ExtraInfo { get; set; } = new ObservableCollection<string>();
 
+        public PlayerQuestViewModel LocalPlayerQuestProgress { get; set; } = new PlayerQuestViewModel();
+        public PlayerQuestViewModel OpponentQuestProgress { get; set; } = new PlayerQuestViewModel();
+
         public WindowViewModel()
         {
 
@@ -40,9 +43,11 @@ namespace HDT.Plugins.Custom.ViewModels
                 MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
                 MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
 
-
                 ExtraInfo.Add("Extra Line 1");
                 ExtraInfo.Add("Extra Line 2");
+
+                LocalPlayerQuestProgress.Set("Player Quest", 0, 4);
+                OpponentQuestProgress.Set("Opponent Quest", 0, 7);
             }
         }
 

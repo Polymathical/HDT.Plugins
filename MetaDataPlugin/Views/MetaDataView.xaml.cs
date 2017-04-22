@@ -11,31 +11,26 @@ namespace HDT.Plugins.Custom
 {
     public partial class MetaDataView : IDisposable
     {
-        UIElement opponentPanel => Core.OverlayCanvas.FindName("BorderStackPanelOpponent") as UIElement;
+        UIElement OpponentPanel => Core.OverlayCanvas.FindName("BorderStackPanelOpponent") as UIElement;
  
-        public MetaDataView(WindowViewModel vm) : base()
-        {
-            this.DataContext = vm;
-        }
-
         public MetaDataView()
         {
             InitializeComponent();
 
             this.DataContext = new WindowViewModel();
 
-            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(opponentPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(opponentPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(opponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
         }
 
         internal void UpdatePosition(object sender, EventArgs e)
         {
-            var panelLeft = opponentPanel?.GetValue(Canvas.LeftProperty) as double?;
-            var panelTop = opponentPanel?.GetValue(Canvas.TopProperty) as double?;
-            var panelWidth = opponentPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
+            var panelLeft = OpponentPanel?.GetValue(Canvas.LeftProperty) as double?;
+            var panelTop = OpponentPanel?.GetValue(Canvas.TopProperty) as double?;
+            var panelWidth = OpponentPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
 
-            if (opponentPanel != null && panelLeft != null && panelTop is double)
+            if (OpponentPanel != null && panelLeft != null && panelTop is double)
             {
                 Canvas.SetTop(this, (double)panelTop);
                 Canvas.SetLeft(this, (double)(panelLeft + panelWidth) + 5);
@@ -59,9 +54,9 @@ namespace HDT.Plugins.Custom
 
         public void Dispose()
         {
-            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).RemoveValueChanged(opponentPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).RemoveValueChanged(opponentPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).RemoveValueChanged(opponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).RemoveValueChanged(OpponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).RemoveValueChanged(OpponentPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).RemoveValueChanged(OpponentPanel, UpdatePosition);
         }
 
         private void DisplayList_LayoutUpdated(object sender, EventArgs e)

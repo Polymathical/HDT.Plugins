@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -38,13 +38,29 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\Users\Jon-PC\AppData\Roaming\HearthstoneDeckTracker\Plugins\MetaDataTracker\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HearthDb">
       <HintPath>..\..\..\Hearthstone Deck Tracker\HearthDb.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="HearthstoneDeckTracker">
-      <HintPath>..\..\..\Hearthstone Deck Tracker\HearthstoneDeckTracker.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -61,8 +77,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\PlayerQuestModel.cs" />
+    <Compile Include="ViewModels\PlayerQuestViewModel.cs" />
     <Compile Include="Views\CardTypeCountView.xaml.cs">
       <DependentUpon>CardTypeCountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuestProgress.xaml.cs">
+      <DependentUpon>QuestProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExtraInfoView.xaml.cs">
       <DependentUpon>ExtraInfoView.xaml</DependentUpon>
@@ -96,6 +117,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\QuestProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ExtraInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,6 +146,17 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hearthstone-Deck-Tracker-Fork\Hearthstone Deck Tracker\Hearthstone Deck Tracker.csproj">
+      <Project>{e63a3f1c-e662-4e62-be43-af27cb9e953d}</Project>
+      <Name>Hearthstone Deck Tracker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

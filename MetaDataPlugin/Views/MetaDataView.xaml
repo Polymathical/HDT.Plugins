@@ -9,7 +9,7 @@
         xmlns:cc="clr-namespace:HDT.Plugins.Custom.Controls"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="clr-namespace:HDT.Plugins.Custom.ViewModels"
-        Width="180" Height="Auto"
+        Width="220" Height="Auto"
         x:Name="DisplayList" BorderBrush="Gray" BorderThickness="2" LayoutUpdated="DisplayList_LayoutUpdated">
     <UserControl.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
@@ -18,10 +18,12 @@
         <vm:WindowViewModel/>
     </UserControl.DataContext>
     <StackPanel Height="Auto">
-        <cc:CardInfoView DataContext="{Binding CardInfo}" FontWeight="Bold"/>
+        <cc:CardInfoView DataContext="{Binding CardInfo}" FontWeight="Bold" />
         <cc:CardTypeCountView DataContext="{Binding CardTypeCount}" />
         <cc:ExtraInfoView DataContext="{Binding ExtraInfo}" />
-        <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}" /> 
+        <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}" />
+        <cc:QuestProgress DataContext="{Binding LocalPlayerQuestProgress}" />
+        <cc:QuestProgress DataContext="{Binding OpponentQuestProgress}" />
     </StackPanel>
 </UserControl>
  

@@ -11,11 +11,11 @@
     <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT" ItemsSource="{Binding}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Grid>
+                <Grid ShowGridLines="False" UseLayoutRounding="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"  />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="32"/>

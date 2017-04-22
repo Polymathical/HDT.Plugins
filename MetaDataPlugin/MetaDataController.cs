@@ -15,12 +15,12 @@ using System.Windows;
 using System.Text.RegularExpressions;
 using HDT.Plugins.Custom.Models;
 using HDT.Plugins.Custom.ViewModels;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 
 namespace HDT.Plugins.Custom
 {
     public class MetaDataController
     {
-
         #region Properties and Variables
 
         internal MetaDataView _dispView;
@@ -115,6 +115,40 @@ namespace HDT.Plugins.Custom
             UpdateCardInformation();
         }
 
+        internal void PlayerPlay(Card c)
+        {
+
+        }
+
+        internal void OpponentPlay(Card c)
+        {
+
+        }
+
+        Entity _localPlayerQuestEntity { get; set; }
+        Entity _opponentQuestEntity { get; set; }
+
+        internal void CheckForAndUpdateQuest()
+        {
+            if (_localPlayerQuestEntity == null)
+                _localPlayerQuestEntity = CoreAPI.Game.Player.RevealedEntities.Where(e => e.IsQuest && e.IsInZone(Zone.SECRET)).FirstOrDefault();
+
+            if (_opponentQuestEntity == null)
+                _opponentQuestEntity = CoreAPI.Game.Opponent.RevealedEntities.Where(e => e.IsQuest && e.IsInZone(Zone.SECRET)).FirstOrDefault();
+
+            if (_localPlayerQuestEntity != null)
+            {
+                var e = _localPlayerQuestEntity;
+                MainWindowViewModel.LocalPlayerQuestProgress.Set(e.LocalizedName, e.GetTag(GameTag.QUEST_PROGRESS), e.GetTag(GameTag.QUEST_PROGRESS_TOTAL));
+            }
+
+            if (_opponentQuestEntity != null)
+            {
+                var e = _opponentQuestEntity;
+                MainWindowViewModel.OpponentQuestProgress.Set(e.LocalizedName, e.GetTag(GameTag.QUEST_PROGRESS), e.GetTag(GameTag.QUEST_PROGRESS_TOTAL));
+            }
+        }
+
         private void UpdateCardMetaData()
         {
             int spellCount = 0;
@@ -138,7 +172,7 @@ namespace HDT.Plugins.Custom
 
             MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(spellModel));
             MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(minionModel));
-        }   
+        }
 
         public void UpdateCardInformation()
         {
@@ -163,6 +197,7 @@ namespace HDT.Plugins.Custom
 
             UpdateCardMetaData();
             UpdateHandDamageCounter();
+            CheckForAndUpdateQuest();
         }
 
         void UpdateMulliganData()
@@ -245,6 +280,7 @@ namespace HDT.Plugins.Custom
                 PrimaryDamage = SecondaryDamage = damage;
             }
         }
+
         SpellDamageInfo GetCardDirectDamage(Entity e)
         {
             if (e.CardId == HearthDb.CardIds.Collectible.Rogue.SinisterStrike)

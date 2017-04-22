@@ -72,8 +72,6 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        //public object CoreAPI { get; private set; }
-
         public void OnLoad()
         {
             _metaDataView = new MetaDataView();
@@ -86,28 +84,30 @@ namespace HDT.Plugins.Custom
 
             CoreAPI.OverlayCanvas.Children.Add(_metaDataView);
 
+            GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
+            GameEvents.OnPlayerPlay.Add(_metaDataPlugin.PlayerPlay);
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnTurnStart.Add(_metaDataPlugin.TurnStart);
             GameEvents.OnPlayerDraw.Add(_metaDataPlugin.PlayerDraw);
             GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
             GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
-
+           
         }
 
         public void OnUnload()
         {
             _metaDataView.Hide();
-          CoreAPI.OverlayCanvas.Children.Remove(_metaDataView);
-            _metaDataView.Dispose();
+            CoreAPI.OverlayCanvas.Children.Remove(_metaDataView);
 
+            // These lines of debatable usefulness, but meh
+            _metaDataView.Dispose();
             _metaDataView = null;
             _metaDataPlugin = null;
-            _metaDataView = null;
         }
 
         public void OnUpdate()
         {
-            if (Config.Instance.HideInMenu &&  CoreAPI.Game.IsInMenu)
+            if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
             {
                 _metaDataView.Hide();
                 return;
@@ -115,16 +115,8 @@ namespace HDT.Plugins.Custom
             else
             {
                 _metaDataView.Show();
-
-                // Will this create stacking waits? 
-                Wait(100);
                 _metaDataPlugin?.Update();
             }
-        }
-
-        async void Wait(int ms)
-        {
-            await Task.Delay(ms);
         }
     }
 }
