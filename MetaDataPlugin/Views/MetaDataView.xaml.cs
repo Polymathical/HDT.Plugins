@@ -9,13 +9,15 @@ using HDT.Plugins.Custom.ViewModels;
 
 namespace HDT.Plugins.Custom
 {
-    public partial class MainView : IDisposable
+    public partial class MetaDataView : IDisposable
     {
         UIElement OpponentPanel => Core.OverlayCanvas.FindName("BorderStackPanelOpponent") as UIElement;
  
-        public MainView()
+        public MetaDataView()
         {
             InitializeComponent();
+
+            this.DataContext = new WindowViewModel();
 
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);

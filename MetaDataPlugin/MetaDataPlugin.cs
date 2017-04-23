@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Hearthstone_Deck_Tracker.Controls;
 using Hearthstone_Deck_Tracker.Plugins;
 using System.Reflection;
 using Hearthstone_Deck_Tracker.API;
+using System.Windows.Controls;
+using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 
@@ -10,10 +17,8 @@ namespace HDT.Plugins.Custom
 
     public class MetaDataPlugin : IPlugin
     {
-        private MetaDataModuleContainer _moduleContainer = new MetaDataModuleContainer();
-
-        // Main User Control that Encapsulated everything (for now)
-        private MainView _mainView = new MainView();
+        private MetaDataController _metaDataPlugin;
+        private MetaDataView _metaDataView;
 
         public string Author
         {
@@ -59,7 +64,6 @@ namespace HDT.Plugins.Custom
         {
 
         }
-
         public Version Version
         {
             get
@@ -70,39 +74,48 @@ namespace HDT.Plugins.Custom
 
         public void OnLoad()
         {
-            if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
-                _mainView.Hide();
+            _metaDataView = new MetaDataView();
+            _metaDataPlugin = new MetaDataController(_metaDataView);
+
+            if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
+                _metaDataView.Hide();
             else
-                _mainView.Show();
+                _metaDataView.Show();
 
-            CoreAPI.OverlayCanvas.Children.Add(_mainView);
+            CoreAPI.OverlayCanvas.Children.Add(_metaDataView);
+
+            GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
+            GameEvents.OnPlayerPlay.Add(_metaDataPlugin.PlayerPlay);
+            GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
+            GameEvents.OnTurnStart.Add(_metaDataPlugin.TurnStart);
+            GameEvents.OnPlayerDraw.Add(_metaDataPlugin.PlayerDraw);
+            GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
+            GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
            
-            GameEvents.OnOpponentPlay.Add(_moduleContainer.OpponentPlay);
-            GameEvents.OnPlayerPlay.Add(_moduleContainer.PlayerPlay);
-            GameEvents.OnGameStart.Add(_moduleContainer.GameStart);
-            GameEvents.OnTurnStart.Add(_moduleContainer.TurnStart);
-            GameEvents.OnPlayerDraw.Add(_moduleContainer.PlayerDraw);
-            GameEvents.OnPlayerMulligan.Add(_moduleContainer.PlayerMulligan);
-            GameEvents.OnGameEnd.Add(_moduleContainer.GameEnd);
-
         }
 
         public void OnUnload()
         {
-            _mainView.Hide();
-            CoreAPI.OverlayCanvas.Children.Remove(_mainView);
+            _metaDataView.Hide();
+            CoreAPI.OverlayCanvas.Children.Remove(_metaDataView);
+
+            // These lines of debatable usefulness, but meh
+            _metaDataView.Dispose();
+            _metaDataView = null;
+            _metaDataPlugin = null;
         }
 
         public void OnUpdate()
         {
             if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
             {
-                _mainView.Hide();
+                _metaDataView.Hide();
                 return;
             }
             else
             {
-                _mainView.Show();
+                _metaDataView.Show();
+                _metaDataPlugin?.Update();
             }
         }
     }

@@ -77,16 +77,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers.cs" />
-    <Compile Include="IModule.cs" />
-    <Compile Include="Models\DamageModel.cs" />
-    <Compile Include="Modules\CardTypeCountModule.cs" />
     <Compile Include="Models\PlayerQuestModel.cs" />
-    <Compile Include="Modules\CardCostModule.cs" />
-    <Compile Include="Modules\DamageModule.cs" />
-    <Compile Include="Modules\MulliganOddsModule.cs" />
-    <Compile Include="Modules\QuestTrackerModule.cs" />
-    <Compile Include="ViewModels\DamageViewModel.cs" />
     <Compile Include="ViewModels\PlayerQuestViewModel.cs" />
     <Compile Include="Views\CardTypeCountView.xaml.cs">
       <DependentUpon>CardTypeCountView.xaml</DependentUpon>
@@ -112,12 +103,12 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Models\MulliganOddsModel.cs" />
     <Compile Include="MetaDataPlugin.cs" />
-    <Compile Include="MetaDataModuleContainer.cs" />
+    <Compile Include="MetaDataController.cs" />
     <Compile Include="ViewModels\CardTypeCountViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Converters\DoubleToPercentTextValueConverter.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="Views\MetaDataView.xaml.cs">
+      <DependentUpon>MetaDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Views\MetaDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,7 +156,6 @@
     <ProjectReference Include="..\..\Hearthstone-Deck-Tracker-Fork\Hearthstone Deck Tracker\Hearthstone Deck Tracker.csproj">
       <Project>{e63a3f1c-e662-4e62-be43-af27cb9e953d}</Project>
       <Name>Hearthstone Deck Tracker</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,19 +20,12 @@ namespace HDT.Plugins.Custom.ViewModels
             Goal = 4;
         }
 
-        public PlayerQuestViewModel(PlayerQuestModel questModel, bool isLocalPlayer)
-        {
-            Set(questModel, isLocalPlayer);
-        }
-
-
         public void Set(PlayerQuestModel questModel, bool isLocalPlayer)
         {
             QuestName = questModel.QuestName;
             Progress = questModel.Progress;
             Goal = questModel.Goal;
         }
-
 
         public void Set(string questName, int progress, int goal)
         {

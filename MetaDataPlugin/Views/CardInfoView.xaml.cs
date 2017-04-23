@@ -1,7 +1,5 @@
-﻿using HDT.Plugins.Custom.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +20,6 @@ namespace HDT.Plugins.Custom.Controls
     /// </summary>
     public partial class CardInfoView : UserControl
     {
-        public ObservableCollection<CardViewModel> CardInfo { get; set; } = new ObservableCollection<CardViewModel>();
-
         public CardInfoView()
         {
             InitializeComponent();
