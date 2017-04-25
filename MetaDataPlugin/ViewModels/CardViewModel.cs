@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
-    public class CardViewModel : ViewModelBase
+    public class CardViewModel : BindableBase
     {
         private int _cardCost = 0;
         private string _cardDrawPercent = String.Empty;

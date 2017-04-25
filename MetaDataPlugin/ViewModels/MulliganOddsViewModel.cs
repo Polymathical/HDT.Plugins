@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
-    public class MulliganOddsViewModel : ViewModelBase
+    public class MulliganOddsViewModel : BindableBase
     {
         private string _lowerOdds = String.Empty;
         private string _equalOdds = String.Empty;

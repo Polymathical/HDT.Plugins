@@ -177,7 +177,6 @@ namespace HDT.Plugins.Custom
         public void UpdateCardInformation()
         {
             MainWindowViewModel.Clear();
-            //todo: Update only items changed instead of clearing
 
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)

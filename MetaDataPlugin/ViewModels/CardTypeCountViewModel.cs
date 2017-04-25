@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
-    public class CardTypeCountViewModel : ViewModelBase
+    public class CardTypeCountViewModel : BindableBase
     {
         private string _cardTypeName = String.Empty;
         private int _cardTypeCount = 0;

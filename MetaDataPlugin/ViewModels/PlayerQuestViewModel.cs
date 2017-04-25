@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
-    public class PlayerQuestViewModel : ViewModelBase
+    public class PlayerQuestViewModel : BindableBase
     {
         private string _questName = String.Empty;
         private int _progress = 0;

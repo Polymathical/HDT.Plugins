@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HDT.Plugins.Custom.Models
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

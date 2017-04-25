@@ -11,7 +11,7 @@ using HDT.Plugins.Custom;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
-    public class CardInfoViewModel : ViewModelBase
+    public class CardInfoViewModel : BindableBase
     {
         private int _cardCost;
         private string _cardDrawPercent = String.Empty;
