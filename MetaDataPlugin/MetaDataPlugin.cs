@@ -11,15 +11,16 @@ using System.Windows.Controls;
 using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
+using HDT.Plugins.Custom.Controls;
 
 namespace HDT.Plugins.Custom
 {
 
     public class MetaDataPlugin : IPlugin
     {
-        private MetaDataController _metaDataPlugin;
-        private MetaDataView _metaDataView;
-
+        private MetaDataPluginMain _metaDataPlugin;
+        MulliganOddsView MulliganView { get; set; }
+        CardInfoView CardView { get; set; }
         public string Author
         {
             get
@@ -64,6 +65,7 @@ namespace HDT.Plugins.Custom
         {
 
         }
+
         public Version Version
         {
             get
@@ -74,15 +76,21 @@ namespace HDT.Plugins.Custom
 
         public void OnLoad()
         {
-            _metaDataView = new MetaDataView();
-            _metaDataPlugin = new MetaDataController(_metaDataView);
+            MulliganView = new MulliganOddsView();
+            CardView = new CardInfoView();
 
-            if (Config.Instance.HideInMenu && Hearthstone_Deck_Tracker.API.Core.Game.IsInMenu)
-                _metaDataView.Hide();
-            else
-                _metaDataView.Show();
+            _metaDataPlugin = new MetaDataPluginMain(MulliganView, CardView);
 
-            CoreAPI.OverlayCanvas.Children.Add(_metaDataView);
+            MulliganView = new MulliganOddsView();
+            CardView = new CardInfoView();
+
+            _metaDataPlugin.MulligansView = MulliganView;
+            _metaDataPlugin.CardView = CardView;
+
+            Hide();
+
+            CoreAPI.OverlayCanvas.Children.Add(MulliganView);
+            CoreAPI.OverlayCanvas.Children.Add(CardView);
 
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
             GameEvents.OnPlayerPlay.Add(_metaDataPlugin.PlayerPlay);
@@ -91,32 +99,44 @@ namespace HDT.Plugins.Custom
             GameEvents.OnPlayerDraw.Add(_metaDataPlugin.PlayerDraw);
             GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
             GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
-           
+
+            Show();
         }
 
         public void OnUnload()
         {
-            _metaDataView.Hide();
-            CoreAPI.OverlayCanvas.Children.Remove(_metaDataView);
-
-            // These lines of debatable usefulness, but meh
-            _metaDataView.Dispose();
-            _metaDataView = null;
-            _metaDataPlugin = null;
+            CoreAPI.OverlayCanvas.Children.Remove(MulliganView);
+            CoreAPI.OverlayCanvas.Children.Add(CardView);
         }
 
         public void OnUpdate()
         {
+            SetVisibility();
+        }
+
+        void SetVisibility()
+        {
             if (Config.Instance.HideInMenu && CoreAPI.Game.IsInMenu)
             {
-                _metaDataView.Hide();
+                Hide();
                 return;
             }
             else
             {
-                _metaDataView.Show();
+                Show();
                 _metaDataPlugin?.Update();
             }
+        }
+        void Show()
+        {
+            CardView.Visibility = Visibility.Visible;
+            MulliganView.Visibility = Visibility.Visible;
+        }
+
+        void Hide()
+        {
+            CardView.Visibility = Visibility.Hidden;
+            MulliganView.Visibility = Visibility.Hidden;
         }
     }
 }
