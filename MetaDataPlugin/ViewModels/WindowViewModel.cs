@@ -17,9 +17,9 @@ namespace HDT.Plugins.Custom.ViewModels
     {
         public CardInfoViewModel CardInfoVM { get; set; } = new CardInfoViewModel();
 
-        public ObservableCollection<CardTypeCountViewModel> CardTypeCount { get; set; } = new ObservableCollection<CardTypeCountViewModel>();
+        public CardTypeCountViewModel CardTypeCountVM { get; set; } = new CardTypeCountViewModel();
 
-        public ObservableCollection<MulliganOddsViewModel> MulliganCardOdds { get; set; } = new ObservableCollection<MulliganOddsViewModel>();
+        public MulliganOddsViewModel MulliganOddsVM { get; set; } = new MulliganOddsViewModel();
 
         public ObservableCollection<string> ExtraInfo { get; set; } = new ObservableCollection<string>();
 
@@ -32,14 +32,6 @@ namespace HDT.Plugins.Custom.ViewModels
             // Check for design mode. 
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
             {
-               
-                CardTypeCount.Add(new CardTypeCountViewModel("Spell", 8, 30));
-                CardTypeCount.Add(new CardTypeCountViewModel("Minions", 16, 30));
-
-                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsViewModel("16%", "12%", "72%"));
 
                 ExtraInfo.Add("Extra Line 1");
                 ExtraInfo.Add("Extra Line 2");
@@ -51,8 +43,9 @@ namespace HDT.Plugins.Custom.ViewModels
 
         public void Clear()
         {
-            CardTypeCount.Clear();
-            MulliganCardOdds.Clear();
+            CardInfoVM.CardInfo.Clear();
+            CardTypeCountVM.CardTypeCount.Clear();
+            MulliganOddsVM.MulliganCardOdds.Clear();
             ExtraInfo.Clear();
         }
 

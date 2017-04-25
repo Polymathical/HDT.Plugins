@@ -25,7 +25,6 @@ namespace HDT.Plugins.Custom
 
         internal MetaDataView _dispView;
         internal WindowViewModel MainWindowViewModel { get; set; }
-        CardInfoViewModel CardInfoVM = new CardInfoViewModel();
 
         IEnumerable<Entity> EntitiesInHand
         {
@@ -75,6 +74,7 @@ namespace HDT.Plugins.Custom
         {
             _dispView = displayView;
             MainWindowViewModel = new WindowViewModel();
+
             _dispView.DataContext = MainWindowViewModel;
 
             if (ShouldHide)
@@ -171,16 +171,13 @@ namespace HDT.Plugins.Custom
             var spellModel = new CardTypeCountModel("Spells", spellCount, DeckCardCount);
             var minionModel = new CardTypeCountModel("Minions", mininionCount, DeckCardCount);
 
-            MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(spellModel));
-            MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(minionModel));
+            MainWindowViewModel.CardTypeCountVM.CardTypeCount.Add(spellModel);
+            MainWindowViewModel.CardTypeCountVM.CardTypeCount.Add(minionModel);
         }
-
-     
 
         public void UpdateCardInformation()
         {
             MainWindowViewModel.Clear();
-            CardInfoVM.CardInfo.Clear();
 
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)
@@ -189,7 +186,7 @@ namespace HDT.Plugins.Custom
                 runningTotal += equalOdds;
 
                 var cm = new CardInfoModel(kv.Key, Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(runningTotal));
-                CardInfoVM.CardInfo.Add(cm);
+                MainWindowViewModel.CardInfoVM.CardInfo.Add(cm);
 
             }
 
@@ -218,8 +215,8 @@ namespace HDT.Plugins.Custom
                 var lowerEqualOdds = DeckCostStats(c.Cost, ComparisonType.LessThanEqual) / cardsAfterReshuffle;
                 var higherEqualOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThanEqual) / cardsAfterReshuffle;
 
-                var mom = new MulliganOddsModel(lowerOdds, equalOdds, higherOdds);
-                MainWindowViewModel.MulliganCardOdds.Add(new ViewModels.MulliganOddsViewModel(mom));
+                var mom = new MulliganOddsModel(Helpers.ToPercentString(lowerOdds), Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(higherOdds));
+                MainWindowViewModel.MulliganOddsVM.MulliganCardOdds.Add(mom);
             }
         }
 

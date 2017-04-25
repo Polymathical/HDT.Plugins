@@ -1,69 +1,32 @@
 ﻿using HDT.Plugins.Custom.Models;
+using Hearthstone_Deck_Tracker.Hearthstone;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 
 namespace HDT.Plugins.Custom.ViewModels
 {
     public class CardTypeCountViewModel : BindableBase
     {
-        private string _cardTypeName = String.Empty;
-        private int _cardTypeCount = 0;
-        private int _deckCardCount = 0;
-        public string CardTypeName { get { return _cardTypeName; } set { Set(ref _cardTypeName, value); } }
+        public ObservableCollection<CardTypeCountModel> CardTypeCount { get; set; } = new ObservableCollection<CardTypeCountModel>();
 
-        public int CardTypeCount
+        public CardTypeCountViewModel()
         {
-            get { return _cardTypeCount; }
-            set
+            // Check for design mode. 
+            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
             {
-                if (Set(ref _cardTypeCount, value))
-                    RaiseChange(nameof(CardCountPercent));
-            }
-        }
-        public int DeckCardCount
-        {
-            get { return _deckCardCount; }
-            set
-            {
-                if (Set(ref _deckCardCount, value))
-                    RaiseChange(nameof(CardCountPercent));
+                CardTypeCount.Add(new CardTypeCountModel("Spell", 8, 30));
+                CardTypeCount.Add(new CardTypeCountModel("Minions", 16, 30));
             }
         }
 
-
-        public string CardCountPercent
-        {
-            get
-            {
-                var cardCountPercent = CardTypeCount / (double)DeckCardCount;
-
-                var nfi = new NumberFormatInfo();
-                nfi.PercentDecimalDigits = 0;
-                nfi.PercentPositivePattern = 1;
-
-                return String.Format(nfi, "{0:P}", cardCountPercent);
-            }
-        }
-
-        public CardTypeCountViewModel(string cardTypeName, int cardCount, int deckCardCount)
-        {
-            CardTypeName = cardTypeName;
-            CardTypeCount = cardCount;
-            DeckCardCount = deckCardCount;
-        }
-
-        public CardTypeCountViewModel(CardTypeCountModel model)
-        {
-            CardTypeName = model.CardTypeName;
-            CardTypeCount = model.CardCount;
-            DeckCardCount = model.DeckCardCount;
-        }
-
-
-
+       
     }
 }

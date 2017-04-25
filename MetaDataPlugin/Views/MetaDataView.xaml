@@ -19,9 +19,9 @@
     </UserControl.Background>
     <StackPanel Height="Auto">
         <cc:CardInfoView DataContext="{Binding CardInfoVM}" FontWeight="Bold" />
-        <cc:CardTypeCountView DataContext="{Binding CardTypeCount}" />
+        <cc:CardTypeCountView DataContext="{Binding CardTypeCountVM}" />
         <cc:ExtraInfoView DataContext="{Binding ExtraInfo}" />
-        <cc:MulliganOddsView DataContext="{Binding MulliganCardOdds}" />
+        <cc:MulliganOddsView DataContext="{Binding MulliganOddsVM}" />
         <cc:QuestProgress DataContext="{Binding LocalPlayerQuestProgress}" />
         <cc:QuestProgress DataContext="{Binding OpponentQuestProgress}" />
     </StackPanel>

@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              mc:Ignorable="d" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT"
+             xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
              d:DesignHeight="300" d:DesignWidth="300">
-
-    <ItemsControl ItemsSource="{Binding}" Height="Auto" Margin="0">
+    <UserControl.DataContext>
+        <ViewModels:CardTypeCountViewModel />
+    </UserControl.DataContext>
+    <ItemsControl ItemsSource="{Binding CardTypeCount}" Height="Auto" Margin="0">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <TextBlock Width="Auto" Margin="0,3,0,0">
