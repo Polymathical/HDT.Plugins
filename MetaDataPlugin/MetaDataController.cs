@@ -25,6 +25,7 @@ namespace HDT.Plugins.Custom
 
         internal MetaDataView _dispView;
         internal WindowViewModel MainWindowViewModel { get; set; }
+        CardInfoViewModel CardInfoVM = new CardInfoViewModel();
 
         IEnumerable<Entity> EntitiesInHand
         {
@@ -174,9 +175,12 @@ namespace HDT.Plugins.Custom
             MainWindowViewModel.CardTypeCount.Add(new ViewModels.CardTypeCountViewModel(minionModel));
         }
 
+     
+
         public void UpdateCardInformation()
         {
             MainWindowViewModel.Clear();
+            CardInfoVM.CardInfo.Clear();
 
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)
@@ -184,8 +188,8 @@ namespace HDT.Plugins.Custom
                 var equalOdds = DeckCostStats(kv.Key, ComparisonType.Equal, false) / DeckCardCount;
                 runningTotal += equalOdds;
 
-                var cm = new CardInfoModel(kv.Key, equalOdds, runningTotal);
-                MainWindowViewModel.CardInfo.Add(new CardViewModel(cm));
+                var cm = new CardInfoModel(kv.Key, Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(runningTotal));
+                CardInfoVM.CardInfo.Add(cm);
 
             }
 

@@ -7,8 +7,10 @@
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-
-    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT" ItemsSource="{Binding}">
+    <UserControl.DataContext>
+        <ViewModels:CardInfoViewModel/>
+    </UserControl.DataContext>
+    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT" ItemsSource="{Binding CardInfo}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Grid ShowGridLines="False" UseLayoutRounding="False">

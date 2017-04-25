@@ -98,7 +98,6 @@
     <Compile Include="Models\CardInfoModel.cs" />
     <Compile Include="Models\CardTypeCountModel.cs" />
     <Compile Include="ViewModels\CardInfoViewModel.cs" />
-    <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\MulliganOddsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Models\MulliganOddsModel.cs" />
