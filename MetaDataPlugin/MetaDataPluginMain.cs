@@ -147,7 +147,7 @@ namespace HDT.Plugins.Custom
                 var equalOdds = DeckCostStats(kv.Key, ComparisonType.Equal, false) / DeckCardCount;
                 runningTotal += equalOdds;
 
-                var cm = new CardInfoModel(kv.Key, Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(runningTotal));
+                var cm = new CardInfoModel(kv.Key, equalOdds, runningTotal);
                 CardInfoVM.CardInfo.Add(cm);
 
             }

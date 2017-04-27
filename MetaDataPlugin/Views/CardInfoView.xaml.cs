@@ -31,7 +31,7 @@ namespace HDT.Plugins.Custom.Controls
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
-
+       
         }
 
         internal void UpdatePosition(object sender, EventArgs e)
@@ -74,5 +74,9 @@ namespace HDT.Plugins.Custom.Controls
             UpdatePosition(sender, e);
         }
 
+        private void TextBlock_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

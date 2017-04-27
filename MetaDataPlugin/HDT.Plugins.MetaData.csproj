@@ -78,6 +78,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\Converters\PercentageConverter.cs" />
     <Compile Include="Views\MulliganOddsView.xaml.cs">
       <DependentUpon>MulliganOddsView.xaml</DependentUpon>
     </Compile>

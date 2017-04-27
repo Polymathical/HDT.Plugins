@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
+             xmlns:Converters="clr-namespace:HDT.Plugins.Custom.Converters"
              mc:Ignorable="d" Foreground="White" Background="DarkGray" Width="195">
     <UserControl.DataContext>
         <DynamicResource ResourceKey="CardInfoVM">
@@ -12,15 +13,17 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <ViewModels:CardInfoViewModel x:Key="CardInfoVM" />
+        <Converters:PercentageConverter x:Key="PercentageConverter" />
+        <Converters:DoubleToPercentTextValueConverter x:Key="DoubleToPercentConverter" />
     </UserControl.Resources>
     <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" UseLayoutRounding="False">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Grid ShowGridLines="False" UseLayoutRounding="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="32" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="*" x:Name="DrawPercentColumn" />
+                        <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="32"/>
@@ -36,13 +39,20 @@
                     </Border>
                     <Border BorderBrush="DarkGray" Background="Gray" Grid.Column="1">
                     </Border>
-                    <Border BorderBrush="DarkGray" Background="Gray" Grid.Column="2">
-                    </Border>
-                    <Rectangle Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Fill="Black" Width="Auto" Height="Auto"></Rectangle>
-                    <TextBlock Grid.Column="0" FontSize="18" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="1" FontSize="16" Text="{Binding CardDrawPercent}"  Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
-                    <TextBlock Grid.Column="2" FontSize="16" Text="{Binding CardDrawRunningTotal}"   VerticalAlignment="Center" HorizontalAlignment="Left"   />
+                    <Border BorderBrush="DarkGray" Background="Gray" Grid.Column="2"  BorderThickness="1,0,0,0" />
 
+                    <TextBlock Grid.Column="0" FontSize="18" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" x:Name="DrawPercentCol" FontSize="16" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                    <TextBlock Grid.Column="2" FontSize="16" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" HorizontalAlignment="Center"    />
+
+                    <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="20" HorizontalAlignment="Left" Fill="LightBlue" VerticalAlignment="Center">
+                        <Rectangle.Width>
+                            <MultiBinding Converter="{StaticResource PercentageConverter}">
+                                <Binding Path="CardDrawPercent" />
+                                <Binding Path="ActualWidth" ElementName="DrawPercentColumn"/>
+                            </MultiBinding>
+                        </Rectangle.Width>
+                    </Rectangle>
                 </Grid>
             </DataTemplate>
         </ItemsControl.ItemTemplate>

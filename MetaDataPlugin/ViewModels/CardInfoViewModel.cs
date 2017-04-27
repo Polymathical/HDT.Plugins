@@ -22,7 +22,7 @@ namespace HDT.Plugins.Custom.ViewModels
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    CardInfo.Add(new CardInfoModel(i, "50%", "75%"));
+                    CardInfo.Add(new CardInfoModel(i, .5, .75));
                 }
             }
         }

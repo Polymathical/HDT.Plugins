@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace HDT.Plugins.Custom
+namespace HDT.Plugins.Custom.Converters
 {
     public class DoubleToPercentTextValueConverter : IValueConverter
     {
