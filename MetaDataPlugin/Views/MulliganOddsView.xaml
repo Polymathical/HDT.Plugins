@@ -6,24 +6,32 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels" 
              x:Class="HDT.Plugins.Custom.Controls.MulliganOddsView"
-             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="Belwe Bd BT" Width="125" Height="110">
+             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="Belwe Bd BT" Width="528">
     <UserControl.DataContext>
         <ViewModels:MulliganOddsViewModel/>
     </UserControl.DataContext>
+
     <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Margin="0">
-        <ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate> 
             <DataTemplate>
-                <TextBlock Width="Auto" Margin="0,3,0,0">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} - {1} - {2}">
-                            <Binding Path="LowerOdds"  />
-                            <Binding Path="EqualOdds"  />
-                            <Binding Path="HigherOdds" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <Grid Width="150" Margin="0,0,25,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding LowerOdds}" Grid.Column="0" />
+                    <TextBlock Text="{Binding EqualOdds}" Grid.Column="1" />
+                    <TextBlock Text="{Binding HigherOdds}" Grid.Column="2" />
+                </Grid>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
-
     </ItemsControl>
+
 </UserControl>

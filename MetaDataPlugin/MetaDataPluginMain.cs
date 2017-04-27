@@ -17,7 +17,7 @@ using HDT.Plugins.Custom.Models;
 using HDT.Plugins.Custom.ViewModels;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using HDT.Plugins.Custom.Controls;
-using HDT.Plugins.Custom.Views;
+ 
 
 namespace HDT.Plugins.Custom
 {

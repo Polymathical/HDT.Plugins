@@ -12,7 +12,7 @@ using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 using HDT.Plugins.Custom.Controls;
-using HDT.Plugins.Custom.Views;
+ 
 
 namespace HDT.Plugins.Custom
 {
