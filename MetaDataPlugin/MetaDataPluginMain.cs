@@ -68,22 +68,36 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        CompositeView MainView { get; set; }
+        MulliganOddsView MulliganView { get; set; }
+        CardInfoView CardView { get; set; }
         CardInfoViewModel CardInfoVM { get; set; }
         MulliganOddsViewModel MulliganOddsVM { get; set; }
 
         #endregion
 
-        public MetaDataPluginMain(CompositeView mv)
+        public MetaDataPluginMain(CardInfoView cv, MulliganOddsView mv)
         {
-            MainView = mv;
-            CardInfoVM = (CardInfoViewModel)MainView.TryFindResource("CardInfoVM");
-            MulliganOddsVM = (MulliganOddsViewModel)MainView.TryFindResource("MulliganOddsVM");
+            CardView = cv;
+            MulliganView = mv;
+            CardInfoVM = (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
+            MulliganOddsVM = (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
+        }
+
+        void HideAll()
+        {
+            CardView.Visibility = Visibility.Visible;
+            MulliganView.Visibility = Visibility.Visible;
+        }
+
+        void ShowAll()
+        {
+            CardView.Visibility = Visibility.Hidden;
+            MulliganView.Visibility = Visibility.Hidden;
         }
 
         public void GameStart()
         {
-            MainView.Show();
+            ShowAll();
             UpdateCardInformation();
         }
 
@@ -104,7 +118,7 @@ namespace HDT.Plugins.Custom
 
         internal void GameEnd()
         {
-            MainView.Hide();
+            HideAll();
         }
 
         internal void PlayerMulligan(Card c)
@@ -140,12 +154,12 @@ namespace HDT.Plugins.Custom
 
             if (CoreAPI.Game.IsMulliganDone == false)
             {
-                MainView.SetMulliganVisibility(Visibility.Visible);
+                MulliganView.Visibility = Visibility.Visible;
                 UpdateMulliganData();
             }
             else
             {
-                MainView.SetMulliganVisibility(Visibility.Hidden);
+                MulliganView.Visibility = Visibility.Hidden;
             }
         }
 

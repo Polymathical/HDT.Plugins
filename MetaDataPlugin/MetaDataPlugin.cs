@@ -12,7 +12,7 @@ using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 using HDT.Plugins.Custom.Controls;
- 
+
 
 namespace HDT.Plugins.Custom
 {
@@ -74,14 +74,17 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        CompositeView MainView { get; set; }
+        CardInfoView cv { get; set; } 
+        MulliganOddsView mv { get; set; }
 
         public void OnLoad()
         {
-            MainView = new CompositeView();
-            _metaDataPlugin = new MetaDataPluginMain(MainView);
+            cv = new CardInfoView();
+            mv = new MulliganOddsView();
+            _metaDataPlugin = new MetaDataPluginMain(cv, mv);
 
-            CoreAPI.OverlayCanvas.Children.Add(MainView);
+            CoreAPI.OverlayCanvas.Children.Add(cv);
+            CoreAPI.OverlayCanvas.Children.Add(mv);
 
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
@@ -96,7 +99,8 @@ namespace HDT.Plugins.Custom
 
         public void OnUnload()
         {
-            CoreAPI.OverlayCanvas.Children.Remove(MainView);
+            CoreAPI.OverlayCanvas.Children.Remove(cv);
+            CoreAPI.OverlayCanvas.Children.Remove(mv);
         }
 
         public void OnUpdate()
@@ -119,12 +123,12 @@ namespace HDT.Plugins.Custom
         }
         void Show()
         {
-            MainView.Visibility = Visibility.Visible;
+            mv.Visibility = cv.Visibility = Visibility.Visible;
         }
 
         void Hide()
         {
-            MainView.Visibility = Visibility.Hidden;
+            mv.Visibility = cv.Visibility = Visibility.Hidden;
         }
     }
 }

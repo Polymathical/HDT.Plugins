@@ -23,5 +23,7 @@ namespace HDT.Plugins.Custom
 
             return String.Format(nfi, "{0:P}", d);
         }
+
+
     }
 }

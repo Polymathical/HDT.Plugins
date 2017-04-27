@@ -6,20 +6,24 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels" 
              x:Class="HDT.Plugins.Custom.Controls.MulliganOddsView"
-             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="Belwe Bd BT" Width="528">
+             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="ChunkFive Roman" >
     <UserControl.DataContext>
-        <ViewModels:MulliganOddsViewModel/>
+        <DynamicResource ResourceKey="MulliganOddsVM">
+        </DynamicResource>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <ViewModels:MulliganOddsViewModel x:Key="MulliganOddsVM" />
+    </UserControl.Resources>
 
-    <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Margin="0">
+    <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="86" Margin="0" Width="135">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" />
+                <StackPanel Orientation="Vertical" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate> 
+        <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Grid Width="150" Margin="0,0,25,0">
+                <Grid Width="Auto" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*"/>

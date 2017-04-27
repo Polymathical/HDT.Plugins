@@ -20,6 +20,7 @@ namespace HDT.Plugins.Custom.Controls
     /// </summary>
     public partial class MulliganOddsView : UserControl
     {
+        
         public MulliganOddsView()
         {
             InitializeComponent();

@@ -5,30 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
-             mc:Ignorable="d" Foreground="White" Background="DarkGray" Height="292" Width="195">
+             mc:Ignorable="d" Foreground="White" Background="DarkGray" Width="195">
     <UserControl.DataContext>
-        <ViewModels:CardInfoViewModel/>
+        <DynamicResource ResourceKey="CardInfoVM">
+        </DynamicResource>
     </UserControl.DataContext>
-    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT" ItemsSource="{Binding CardInfo}">
+    <UserControl.Resources>
+        <ViewModels:CardInfoViewModel x:Key="CardInfoVM" />
+    </UserControl.Resources>
+    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" UseLayoutRounding="False">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Grid ShowGridLines="False" UseLayoutRounding="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40" />
-                        <ColumnDefinition Width="40" />
-                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
-                    <Border BorderBrush="{x:Null}" Width="32" Height="32">
+
+                    <Border BorderBrush="DarkGray" Grid.Column="0" BorderThickness="0,0,1,0">
+                        <Border.OpacityMask>
+                            <SolidColorBrush Color="#FF0078D7"/>
+                        </Border.OpacityMask>
                         <Border.Background>
-                            <ImageBrush ImageSource="/MetaDataTracker;component/Images/mana-gem.png"/>
+                            <SolidColorBrush Color="#FF0078D7"/>
                         </Border.Background>
-                        <TextBlock Grid.Column="0"  Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
-                    <TextBlock Grid.Column="1" Text="{Binding CardDrawPercent}"   VerticalAlignment="Center" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
-                    <TextBlock Grid.Column="2" Text="{Binding CardDrawRunningTotal}"   VerticalAlignment="Center" HorizontalAlignment="Right" TextDecorations="{x:Null}" />
+                    <Border BorderBrush="DarkGray" Background="Gray" Grid.Column="1">
+                    </Border>
+                    <Border BorderBrush="DarkGray" Background="Gray" Grid.Column="2">
+                    </Border>
+                    <Rectangle Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Fill="Black" Width="Auto" Height="Auto"></Rectangle>
+                    <TextBlock Grid.Column="0" FontSize="18" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" FontSize="16" Text="{Binding CardDrawPercent}"  Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                    <TextBlock Grid.Column="2" FontSize="16" Text="{Binding CardDrawRunningTotal}"   VerticalAlignment="Center" HorizontalAlignment="Left"   />
+
                 </Grid>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
