@@ -68,11 +68,11 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        #endregion
-
         CompositeView MainView { get; set; }
         CardInfoViewModel CardInfoVM { get; set; }
         MulliganOddsViewModel MulliganOddsVM { get; set; }
+
+        #endregion
 
         public MetaDataPluginMain(CompositeView mv)
         {
@@ -114,7 +114,7 @@ namespace HDT.Plugins.Custom
 
         internal void PlayerPlay(Card c)
         {
-
+            UpdateCardInformation();
         }
 
         internal void OpponentPlay(Card c)
