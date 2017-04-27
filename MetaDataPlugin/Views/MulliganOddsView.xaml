@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels" 
              x:Class="HDT.Plugins.Custom.Controls.MulliganOddsView"
-             mc:Ignorable="d" Foreground="White" FontSize="16" FontFamily="Belwe Bd BT"
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="Belwe Bd BT" Width="125" Height="110">
     <UserControl.DataContext>
         <ViewModels:MulliganOddsViewModel/>
     </UserControl.DataContext>
@@ -25,6 +24,6 @@
                 </TextBlock>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
-      
+
     </ItemsControl>
 </UserControl>

@@ -17,11 +17,13 @@ using HDT.Plugins.Custom.Models;
 using HDT.Plugins.Custom.ViewModels;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using HDT.Plugins.Custom.Controls;
+using HDT.Plugins.Custom.Views;
 
 namespace HDT.Plugins.Custom
 {
     public class MetaDataPluginMain
     {
+
         #region Properties and Variables
 
         IEnumerable<Entity> EntitiesInHand
@@ -68,19 +70,20 @@ namespace HDT.Plugins.Custom
 
         #endregion
 
-        public MulliganOddsView MulligansView { get; set; }
-        public MulliganOddsViewModel MulligansVM { get; set; } = new MulliganOddsViewModel();
-        public CardInfoView CardView { get; set; }
-        public CardInfoViewModel CardInfoVM { get; set; } = new CardInfoViewModel();
+        CompositeView MainView { get; set; }
+        CardInfoViewModel CardInfoVM { get; set; }
+        MulliganOddsViewModel MulliganOddsVM { get; set; }
 
-        public MetaDataPluginMain(MulliganOddsView mullView, CardInfoView cardView)
+        public MetaDataPluginMain(CompositeView mv)
         {
-            mullView.DataContext = MulligansVM;
-            cardView.DataContext = CardInfoVM;
+            MainView = mv;
+            CardInfoVM = (CardInfoViewModel)MainView.TryFindResource("CardInfoVM");
+            MulliganOddsVM = (MulliganOddsViewModel)MainView.TryFindResource("MulliganOddsVM");
         }
 
         public void GameStart()
         {
+            MainView.Show();
             UpdateCardInformation();
         }
 
@@ -101,7 +104,7 @@ namespace HDT.Plugins.Custom
 
         internal void GameEnd()
         {
-           
+            MainView.Hide();
         }
 
         internal void PlayerMulligan(Card c)
@@ -119,9 +122,11 @@ namespace HDT.Plugins.Custom
 
         }
 
-        public void UpdateCardInformation()
+
+        void UpdateCardInformation()
         {
 
+            CardInfoVM.CardInfo.Clear();
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)
             {
@@ -135,12 +140,19 @@ namespace HDT.Plugins.Custom
 
             if (CoreAPI.Game.IsMulliganDone == false)
             {
+                MainView.SetMulliganVisibility(Visibility.Visible);
                 UpdateMulliganData();
+            }
+            else
+            {
+                MainView.SetMulliganVisibility(Visibility.Hidden);
             }
         }
 
         void UpdateMulliganData()
         {
+            MulliganOddsVM.MulliganCardOdds.Clear();
+
             foreach (Entity e in EntitiesInHand)
             {
                 var c = e.Card;
@@ -155,11 +167,11 @@ namespace HDT.Plugins.Custom
                 var higherEqualOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThanEqual) / cardsAfterReshuffle;
 
                 var mom = new MulliganOddsModel(Helpers.ToPercentString(lowerOdds), Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(higherOdds));
-                MulligansVM.MulliganCardOdds.Add(mom);
+                MulliganOddsVM.MulliganCardOdds.Add(mom);
             }
         }
 
-        private double DeckCostStats(int cost, ComparisonType comparisonType, bool countAsAddedBack = false)
+        double DeckCostStats(int cost, ComparisonType comparisonType, bool countAsAddedBack = false)
         {
             double retValue = 0;
 

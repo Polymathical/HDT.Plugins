@@ -12,6 +12,7 @@ using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 using HDT.Plugins.Custom.Controls;
+using HDT.Plugins.Custom.Views;
 
 namespace HDT.Plugins.Custom
 {
@@ -19,8 +20,7 @@ namespace HDT.Plugins.Custom
     public class MetaDataPlugin : IPlugin
     {
         private MetaDataPluginMain _metaDataPlugin;
-        MulliganOddsView MulliganView { get; set; }
-        CardInfoView CardView { get; set; }
+
         public string Author
         {
             get
@@ -74,27 +74,18 @@ namespace HDT.Plugins.Custom
             }
         }
 
+        CompositeView MainView { get; set; }
+
         public void OnLoad()
         {
-            MulliganView = new MulliganOddsView();
-            CardView = new CardInfoView();
+            MainView = new CompositeView();
+            _metaDataPlugin = new MetaDataPluginMain(MainView);
 
-            _metaDataPlugin = new MetaDataPluginMain(MulliganView, CardView);
+            CoreAPI.OverlayCanvas.Children.Add(MainView);
 
-            MulliganView = new MulliganOddsView();
-            CardView = new CardInfoView();
-
-            _metaDataPlugin.MulligansView = MulliganView;
-            _metaDataPlugin.CardView = CardView;
-
-            Hide();
-
-            CoreAPI.OverlayCanvas.Children.Add(MulliganView);
-            CoreAPI.OverlayCanvas.Children.Add(CardView);
-
+            GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
             GameEvents.OnPlayerPlay.Add(_metaDataPlugin.PlayerPlay);
-            GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnTurnStart.Add(_metaDataPlugin.TurnStart);
             GameEvents.OnPlayerDraw.Add(_metaDataPlugin.PlayerDraw);
             GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
@@ -105,8 +96,7 @@ namespace HDT.Plugins.Custom
 
         public void OnUnload()
         {
-            CoreAPI.OverlayCanvas.Children.Remove(MulliganView);
-            CoreAPI.OverlayCanvas.Children.Add(CardView);
+            CoreAPI.OverlayCanvas.Children.Remove(MainView);
         }
 
         public void OnUpdate()
@@ -129,14 +119,12 @@ namespace HDT.Plugins.Custom
         }
         void Show()
         {
-            CardView.Visibility = Visibility.Visible;
-            MulliganView.Visibility = Visibility.Visible;
+            MainView.Visibility = Visibility.Visible;
         }
 
         void Hide()
         {
-            CardView.Visibility = Visibility.Hidden;
-            MulliganView.Visibility = Visibility.Hidden;
+            MainView.Visibility = Visibility.Hidden;
         }
     }
 }
