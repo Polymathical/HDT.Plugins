@@ -74,17 +74,17 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        CardInfoView cv { get; set; } 
-        MulliganOddsView mv { get; set; }
+        CardInfoView _cv;
+        MulliganOddsView _mv;
 
         public void OnLoad()
         {
-            cv = new CardInfoView();
-            mv = new MulliganOddsView();
-            _metaDataPlugin = new MetaDataPluginMain(cv, mv);
+            _cv = new CardInfoView();
+            _mv = new MulliganOddsView();
+            _metaDataPlugin = new MetaDataPluginMain(_cv, _mv);
 
-            CoreAPI.OverlayCanvas.Children.Add(cv);
-            CoreAPI.OverlayCanvas.Children.Add(mv);
+            CoreAPI.OverlayCanvas.Children.Add(_cv);
+            CoreAPI.OverlayCanvas.Children.Add(_mv);
 
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
@@ -99,8 +99,8 @@ namespace HDT.Plugins.Custom
 
         public void OnUnload()
         {
-            CoreAPI.OverlayCanvas.Children.Remove(cv);
-            CoreAPI.OverlayCanvas.Children.Remove(mv);
+            CoreAPI.OverlayCanvas.Children.Remove(_cv);
+            CoreAPI.OverlayCanvas.Children.Remove(_mv);
         }
 
         public void OnUpdate()
@@ -123,12 +123,12 @@ namespace HDT.Plugins.Custom
         }
         void Show()
         {
-            mv.Visibility = cv.Visibility = Visibility.Visible;
+            _mv.Visibility = _cv.Visibility = Visibility.Visible;
         }
 
         void Hide()
         {
-            mv.Visibility = cv.Visibility = Visibility.Hidden;
+            _mv.Visibility = _cv.Visibility = Visibility.Hidden;
         }
     }
 }
