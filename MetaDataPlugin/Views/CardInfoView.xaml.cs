@@ -75,10 +75,5 @@ namespace HDT.Plugins.Custom.Controls
         {
             UpdatePosition(sender, e);
         }
-
-        private void TextBlock_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-
-        }
     }
 }

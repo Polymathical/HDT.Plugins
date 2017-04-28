@@ -19,8 +19,9 @@ namespace HDT.Plugins.Custom.Converters
         {
             Double.TryParse(values[0].ToString(), out var paramOne);
             Double.TryParse(values[1].ToString(), out var paramTwo);
+            Double.TryParse(values[2].ToString(), out var paramThree);
 
-            return paramOne * paramTwo;
+            return paramOne * paramTwo * paramThree;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
