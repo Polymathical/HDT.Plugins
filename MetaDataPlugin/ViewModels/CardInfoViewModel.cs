@@ -35,12 +35,12 @@ namespace HDT.Plugins.Custom.ViewModels
 
             // Check for design mode. 
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
-            {
-                CardInfo.Add(new CardInfoModel(1, .2, .12));
-                CardInfo.Add(new CardInfoModel(2, .3, .22));
-                CardInfo.Add(new CardInfoModel(3, .8, .55));
-                CardInfo.Add(new CardInfoModel(4, 0, .09));
-                CardInfo.Add(new CardInfoModel(5, .3, .75));
+            { 
+                for(int i = 0; i < 5; i++)
+                {
+                    CardInfo.Add(new CardInfoModel(i, (i + 1) * .1, (i + 1) * .1 + i * .1));
+                }
+                
             }
         }
     }
