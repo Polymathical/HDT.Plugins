@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
              xmlns:Converters="clr-namespace:HDT.Plugins.Custom.Converters"
-             mc:Ignorable="d" Foreground="White" Background="Transparent" Width="Auto" Margin="0">
+             mc:Ignorable="d" Foreground="White" Background="Transparent" RenderTransformOrigin="0.5,0.5">
     <UserControl.DataContext>
         <DynamicResource ResourceKey="CardInfoVM">
         </DynamicResource>
@@ -15,11 +15,20 @@
         <ViewModels:CardInfoViewModel x:Key="CardInfoVM" />
         <Converters:PercentageConverter x:Key="PercentageConverter" />
         <Converters:DoubleToPercentTextValueConverter x:Key="DoubleToPercentConverter" />
-        <RotateTransform x:Key="ControlTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}">
-        </RotateTransform>
         <RotateTransform x:Key="TextTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
     </UserControl.Resources>
-    <ItemsControl x:Name="ViewItems" RenderTransform="{StaticResource ControlTransform}" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0" RenderTransformOrigin="0.5,0.5">
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleX="1.20" ScaleY="1.20"/>
+            <SkewTransform/>
+            <RotateTransform/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0" RenderTransformOrigin="0.5,0.5">
+        <ItemsControl.RenderTransform>
+            <RotateTransform Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
+        </ItemsControl.RenderTransform>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Grid ShowGridLines="False" VerticalAlignment="Top" Margin="0,0,0,0">
@@ -32,13 +41,13 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
-                    <Border BorderBrush="DarkGray" Background="SteelBlue" Grid.Column="0" BorderThickness="0,0,1,1" />
-                    <Border BorderBrush="DarkGray" Background="Gray" BorderThickness="0,0,1,1"  Grid.Column="1" />
-                    <Border BorderBrush="DarkGray" Background="Gray"  Grid.Column="2"  BorderThickness="1,0,0,1" />
+                    <Border Grid.Column="0" BorderBrush="Transparent" Background="SteelBlue"  BorderThickness="0,0,1,1" />
+                    <Border Grid.Column="1" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,1,1"  />
+                    <Border  Grid.Column="2" BorderBrush="Transparent" Background="Gray"   BorderThickness="0,0,0,1" />
 
                     <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" />
                     <TextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
-                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="16" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center"   />
+                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center"   />
 
                     <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
                         <Rectangle.Fill>

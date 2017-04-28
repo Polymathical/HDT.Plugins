@@ -81,6 +81,8 @@ namespace HDT.Plugins.Custom
             MulliganView = mv;
             CardInfoVM = (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
             MulliganOddsVM = (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
+
+            mv.UpdatePosition();
         }
 
         void HideAll()

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels" 
              x:Class="HDT.Plugins.Custom.Controls.MulliganOddsView"
-             mc:Ignorable="d" Foreground="White" Background="DarkGray" FontSize="16" FontFamily="ChunkFive Roman" >
+             mc:Ignorable="d" Foreground="White" Background="Transparent" FontSize="16" FontFamily="ChunkFive Roman" >
     <UserControl.DataContext>
         <DynamicResource ResourceKey="MulliganOddsVM">
         </DynamicResource>
@@ -15,7 +15,7 @@
         <ViewModels:MulliganOddsViewModel x:Key="MulliganOddsVM" />
     </UserControl.Resources>
 
-    <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="86" Margin="0" Width="135">
+    <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Width="Auto">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Vertical" />
@@ -23,16 +23,19 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Grid Width="Auto" Margin="0,0,0,0">
+                <Grid x:Name="MulliganGrid" Width="Auto">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="64"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="{Binding LowerOdds}" Grid.Column="0" />
-                    <TextBlock Text="{Binding EqualOdds}" Grid.Column="1" />
-                    <TextBlock Text="{Binding HigherOdds}" Grid.Column="2" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Fill="SteelBlue" Grid.Column="0" Grid.ColumnSpan="3" />
+                    <TextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0" />
+                    <TextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1" />
+                    <TextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" />
                 </Grid>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
