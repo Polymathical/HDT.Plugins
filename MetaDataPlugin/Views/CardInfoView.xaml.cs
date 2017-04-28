@@ -27,6 +27,7 @@ namespace HDT.Plugins.Custom.Controls
 
         public CardInfoView()
         {
+           
             InitializeComponent();
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
@@ -59,6 +60,7 @@ namespace HDT.Plugins.Custom.Controls
 
         public void Hide()
         {
+            
             this.Visibility = Visibility.Hidden;
         }
 
