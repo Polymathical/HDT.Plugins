@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HDT.Plugins.Custom.Controls.CardInfoView"
+﻿<UserControl x:Name="CardViewControl" x:Class="HDT.Plugins.Custom.Controls.CardInfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,55 +15,56 @@
         <ViewModels:CardInfoViewModel x:Key="CardInfoVM" />
         <Converters:PercentageConverter x:Key="PercentageConverter" />
         <Converters:DoubleToPercentTextValueConverter x:Key="DoubleToPercentConverter" />
+        <RotateTransform x:Key="ControlTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}">
+        </RotateTransform>
+        <RotateTransform x:Key="TextTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
     </UserControl.Resources>
-    <StackPanel>
-        <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid ShowGridLines="False" VerticalAlignment="Top" Margin="0,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="120" x:Name="DrawPercentColumn" />
-                            <ColumnDefinition Width="40" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="32"/>
-                        </Grid.RowDefinitions>
+    <ItemsControl x:Name="ViewItems" RenderTransform="{StaticResource ControlTransform}" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0" RenderTransformOrigin="0.5,0.5">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid ShowGridLines="False" VerticalAlignment="Top" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="120" x:Name="DrawPercentColumn" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
 
-                        <Border BorderBrush="DarkGray" Background="SteelBlue" Grid.Column="0" BorderThickness="0,0,1,1" />
-                        <Border BorderBrush="DarkGray" Background="Gray" BorderThickness="0,0,1,1"  Grid.Column="1" />
-                        <Border BorderBrush="DarkGray" Background="Gray"  Grid.Column="2"  BorderThickness="1,0,0,1" />
+                    <Border BorderBrush="DarkGray" Background="SteelBlue" Grid.Column="0" BorderThickness="0,0,1,1" />
+                    <Border BorderBrush="DarkGray" Background="Gray" BorderThickness="0,0,1,1"  Grid.Column="1" />
+                    <Border BorderBrush="DarkGray" Background="Gray"  Grid.Column="2"  BorderThickness="1,0,0,1" />
 
-                        <TextBlock Grid.Column="0" FontSize="18" Text="{Binding CardCost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="1" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
-                        <TextBlock Grid.Column="2" FontSize="16" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" HorizontalAlignment="Center"    />
+                    <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+                    <TextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="16" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center"   />
 
-                        <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
-                            <Rectangle.Fill>
-                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                    <LinearGradientBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </LinearGradientBrush.RelativeTransform>
-                                    <GradientStop Color="#FF114DFF" Offset="1"/>
-                                    <GradientStop Color="#FF002697" Offset="0.304"/>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                            <Rectangle.Width>
-                                <MultiBinding Converter="{StaticResource PercentageConverter}">
-                                    <Binding Path="CardDrawPercent" />
-                                    <Binding Path="Width" ElementName="DrawPercentColumn"/>
-                                    <Binding Source="{StaticResource CardInfoVM}" Mode="OneWay" FallbackValue="1" Path="PercentNormalizationFactor" />
-                                </MultiBinding>
-                            </Rectangle.Width>
-                        </Rectangle>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+                    <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF114DFF" Offset="1"/>
+                                <GradientStop Color="#FF002697" Offset="0.304"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.Width>
+                            <MultiBinding Converter="{StaticResource PercentageConverter}">
+                                <Binding Path="CardDrawPercent" />
+                                <Binding Path="Width" ElementName="DrawPercentColumn"/>
+                                <Binding Source="{StaticResource CardInfoVM}" Mode="OneWay" FallbackValue="1" Path="PercentNormalizationFactor" />
+                            </MultiBinding>
+                        </Rectangle.Width>
+                    </Rectangle>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

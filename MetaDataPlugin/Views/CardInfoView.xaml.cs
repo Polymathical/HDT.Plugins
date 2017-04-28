@@ -25,14 +25,47 @@ namespace HDT.Plugins.Custom.Controls
     {
         UIElement OpponentPanel => Core.OverlayCanvas?.FindName("BorderStackPanelOpponent") as UIElement;
 
+        public static readonly DependencyProperty ControlRotateAngleProperty = DependencyProperty.Register("ControlRotateAngle", typeof(double), typeof(CardInfoView));
+
+        public double ControlRotateAngle
+        {
+            get { return (double)GetValue(ControlRotateAngleProperty); }
+            set { SetValue(ControlRotateAngleProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextRotateAngleProperty = DependencyProperty.Register("TextRotateAngle", typeof(double), typeof(CardInfoView));
+
+        public double TextRotateAngle
+        {
+            get { return (double)GetValue(TextRotateAngleProperty); }
+            set { SetValue(TextRotateAngleProperty, value); }
+        }
+
+
+        private bool _verticalBars = false;
+        public bool VerticalBars
+        {
+            get { return _verticalBars; }
+            set
+            {
+                _verticalBars = value;
+                if (value != true)
+                    return;
+
+                ControlRotateAngle = -90;
+                TextRotateAngle = 90;
+            }
+        }
+
         public CardInfoView()
         {
-           
             InitializeComponent();
+
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
-       
+
+
         }
 
         internal void UpdatePosition(object sender, EventArgs e)
@@ -60,7 +93,7 @@ namespace HDT.Plugins.Custom.Controls
 
         public void Hide()
         {
-            
+
             this.Visibility = Visibility.Hidden;
         }
 
