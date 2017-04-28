@@ -25,7 +25,7 @@ namespace HDT.Plugins.Custom.Controls
     {
         UIElement OpponentPanel => Core.OverlayCanvas?.FindName("BorderStackPanelOpponent") as UIElement;
 
-        public static readonly DependencyProperty ControlRotateAngleProperty = DependencyProperty.Register("ControlRotateAngle", typeof(double), typeof(CardInfoView));
+        public static readonly DependencyProperty ControlRotateAngleProperty = DependencyProperty.Register("ControlRotateAngle", typeof(double), typeof(CardInfoView), new PropertyMetadata(0.0));
 
         public double ControlRotateAngle
         {
@@ -33,7 +33,7 @@ namespace HDT.Plugins.Custom.Controls
             set { SetValue(ControlRotateAngleProperty, value); }
         }
 
-        public static readonly DependencyProperty TextRotateAngleProperty = DependencyProperty.Register("TextRotateAngle", typeof(double), typeof(CardInfoView));
+        public static readonly DependencyProperty TextRotateAngleProperty = DependencyProperty.Register("TextRotateAngle", typeof(double), typeof(CardInfoView), new PropertyMetadata(0.0));
 
         public double TextRotateAngle
         {
