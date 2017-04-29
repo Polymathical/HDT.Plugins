@@ -60,7 +60,7 @@ namespace HDT.Plugins.Custom.Controls
         public CardInfoView()
         {
             InitializeComponent();
-
+         
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(OpponentPanel, UpdatePosition);
@@ -68,7 +68,7 @@ namespace HDT.Plugins.Custom.Controls
 
         }
 
-        internal void UpdatePosition(object sender, EventArgs e)
+        public void UpdatePosition(object sender, EventArgs e)
         {
             var panelLeft = OpponentPanel?.GetValue(Canvas.LeftProperty) as double?;
             var panelTop = OpponentPanel?.GetValue(Canvas.TopProperty) as double?;

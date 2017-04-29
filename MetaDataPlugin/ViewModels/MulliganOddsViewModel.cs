@@ -14,15 +14,17 @@ namespace HDT.Plugins.Custom.ViewModels
     {
         public ObservableCollection<MulliganOddsModel> MulliganCardOdds { get; set; } = new ObservableCollection<MulliganOddsModel>();
 
+    
+
         public MulliganOddsViewModel()
         {
             // Check for design mode. 
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
             {
-                MulliganCardOdds.Add(new MulliganOddsModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsModel("16%", "12%", "72%"));
-                MulliganCardOdds.Add(new MulliganOddsModel("16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsModel(1, "16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsModel(2, "16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsModel(3, "16%", "12%", "72%"));
+                MulliganCardOdds.Add(new MulliganOddsModel(4, "16%", "12%", "72%"));
             }
         }
     }

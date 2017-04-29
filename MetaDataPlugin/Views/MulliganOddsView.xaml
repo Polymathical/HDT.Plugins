@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels" 
              x:Class="HDT.Plugins.Custom.Controls.MulliganOddsView"
-             mc:Ignorable="d" Foreground="White" Background="Transparent" FontSize="16" FontFamily="ChunkFive Roman" >
+             mc:Ignorable="d" Foreground="White" Background="Transparent">
     <UserControl.DataContext>
         <DynamicResource ResourceKey="MulliganOddsVM">
         </DynamicResource>
@@ -14,16 +14,16 @@
     <UserControl.Resources>
         <ViewModels:MulliganOddsViewModel x:Key="MulliganOddsVM" />
     </UserControl.Resources>
-
-    <ItemsControl ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Width="Auto">
+     <ItemsControl x:Name="MulliganOddsItems" ItemsSource="{Binding MulliganCardOdds}" Height="Auto" Width="Auto">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical" />
+                <Canvas />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Grid x:Name="MulliganGrid" Width="Auto">
+                <local:MulliganCardControl /> 
+                <!--<Grid x:Name="MulliganGrid" Width="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="64"/>
                         <ColumnDefinition Width="64"/>
@@ -36,9 +36,8 @@
                     <TextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0" />
                     <TextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1" />
                     <TextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" />
-                </Grid>
+                </Grid>-->
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
-
 </UserControl>

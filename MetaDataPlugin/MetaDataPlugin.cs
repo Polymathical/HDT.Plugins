@@ -12,7 +12,7 @@ using System.Windows;
 using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 using HDT.Plugins.Custom.Controls;
-
+using System.ComponentModel;
 
 namespace HDT.Plugins.Custom
 {
@@ -79,12 +79,20 @@ namespace HDT.Plugins.Custom
 
         public void OnLoad()
         {
+
+            var sourceControl = CoreAPI.OverlayCanvas;
+          
             _cv = new CardInfoView();
             _mv = new MulliganOddsView();
+            _cv.Hide();
+            _mv.Hide();
+
             _metaDataPlugin = new MetaDataPluginMain(_cv, _mv);
 
             CoreAPI.OverlayCanvas.Children.Add(_cv);
             CoreAPI.OverlayCanvas.Children.Add(_mv);
+
+            _cv.UpdatePosition(new object(), new EventArgs());
 
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
@@ -94,7 +102,7 @@ namespace HDT.Plugins.Custom
             GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
             GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
 
-            Show();
+          
         }
 
         public void OnUnload()

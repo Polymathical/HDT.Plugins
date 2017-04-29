@@ -30,7 +30,7 @@ namespace HDT.Plugins.Custom
         {
             get
             {
-                var eih = from e in CoreAPI.Game.Player.Hand where e.Info.CardMark != CardMark.Coin orderby e.GetTag(GameTag.ZONE_POSITION) select e;
+                var eih = from e in CoreAPI.Game.Player.Hand  orderby e.GetTag(GameTag.ZONE_POSITION) select e;
 
                 if (eih.All(e => e.HasTag(GameTag.ZONE_POSITION)))
                     eih = eih.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
@@ -38,6 +38,8 @@ namespace HDT.Plugins.Custom
                 return eih;
             }
         }
+
+        IEnumerable<Entity> EntitiesInHandNoCoin => EntitiesInHand.Where(c => c.Info.CardMark != CardMark.Coin); 
 
         enum ComparisonType { LessThan, LessThanEqual, Equal, GreaterThanEqual, GreaterThan };
 
@@ -52,7 +54,7 @@ namespace HDT.Plugins.Custom
             get
             {
                 var ccbc = new SortedDictionary<int, int>();
-
+          
                 foreach (Card c in PlayerCardList)
                 {
                     if (c.Count == 0)
@@ -70,8 +72,8 @@ namespace HDT.Plugins.Custom
 
         MulliganOddsView MulliganView { get; set; }
         CardInfoView CardView { get; set; }
-        CardInfoViewModel CardInfoVM { get; set; }
-        MulliganOddsViewModel MulliganOddsVM { get; set; }
+        CardInfoViewModel CardInfoVM => (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
+        MulliganOddsViewModel MulliganOddsVM => (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
 
         #endregion
 
@@ -79,10 +81,10 @@ namespace HDT.Plugins.Custom
         {
             CardView = cv;
             MulliganView = mv;
-            CardInfoVM = (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
-            MulliganOddsVM = (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
+          //  CardInfoVM = (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
+           // MulliganOddsVM = (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
 
-            mv.UpdatePosition();
+       
         }
 
         void HideAll()
@@ -99,7 +101,7 @@ namespace HDT.Plugins.Custom
 
         public void GameStart()
         {
-            ShowAll();
+            CardView.Show();
             UpdateCardInformation();
         }
 
@@ -115,6 +117,7 @@ namespace HDT.Plugins.Custom
 
         internal void PlayerDraw(Card c)
         {
+           
             UpdateCardInformation();
         }
 
@@ -138,9 +141,12 @@ namespace HDT.Plugins.Custom
 
         }
 
+        bool IsMulliganPending => CoreAPI.Game.PlayerEntity.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
 
         void UpdateCardInformation()
         {
+            if (CardInfoVM == null)
+                return;
 
             CardInfoVM.CardInfo.Clear();
             double runningTotal = 0;
@@ -154,22 +160,33 @@ namespace HDT.Plugins.Custom
 
             }
 
-            if (CoreAPI.Game.IsMulliganDone == false)
+            if (IsMulliganPending)
             {
                 MulliganView.Visibility = Visibility.Visible;
                 UpdateMulliganData();
             }
-            else
+            else if(CoreAPI.Game.IsMulliganDone)
             {
                 MulliganView.Visibility = Visibility.Hidden;
             }
+
+
         }
+
+        bool _mullUpdated = false;
 
         void UpdateMulliganData()
         {
+            if (_mullUpdated)
+                return;
+
+            if (MulliganOddsVM == null)
+                return;
+
             MulliganOddsVM.MulliganCardOdds.Clear();
 
-            foreach (Entity e in EntitiesInHand)
+            int cardNumber = 0;
+            foreach (Entity e in EntitiesInHandNoCoin)
             {
                 var c = e.Card;
 
@@ -182,9 +199,10 @@ namespace HDT.Plugins.Custom
                 var lowerEqualOdds = DeckCostStats(c.Cost, ComparisonType.LessThanEqual) / cardsAfterReshuffle;
                 var higherEqualOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThanEqual) / cardsAfterReshuffle;
 
-                var mom = new MulliganOddsModel(Helpers.ToPercentString(lowerOdds), Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(higherOdds));
+                var mom = new MulliganOddsModel(cardNumber, Helpers.ToPercentString(lowerOdds), Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(higherOdds));
                 MulliganOddsVM.MulliganCardOdds.Add(mom);
             }
+            _mullUpdated = true;
         }
 
         double DeckCostStats(int cost, ComparisonType comparisonType, bool countAsAddedBack = false)

@@ -19,7 +19,7 @@
     </UserControl.Resources>
     <UserControl.RenderTransform>
         <TransformGroup>
-            <ScaleTransform ScaleX="1.20" ScaleY="1.20"/>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
             <SkewTransform/>
             <RotateTransform/>
             <TranslateTransform/>

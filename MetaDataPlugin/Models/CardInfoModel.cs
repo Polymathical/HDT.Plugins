@@ -5,7 +5,7 @@ namespace HDT.Plugins.Custom.Models
 {
     public class CardInfoModel : BindableBase
     {
-        private int _cardCost;
+        private int _cardCost = 0;
         private double _cardDrawPercent = 0;
         private double _cardDrawRunningTotal = 0;
 
@@ -21,6 +21,16 @@ namespace HDT.Plugins.Custom.Models
             CardCost = cost;
             CardDrawPercent = drawPercent;
             CardDrawRunningTotal = runningTotal;
+        }
+
+        public CardInfoModel()
+        {
+            if(Helpers.InDesignMode)
+            {
+                CardCost = 1;
+                CardDrawPercent = .5;
+                CardDrawRunningTotal = .8;
+            }
         }
 
     }
