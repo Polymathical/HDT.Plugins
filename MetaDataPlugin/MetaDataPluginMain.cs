@@ -30,7 +30,7 @@ namespace HDT.Plugins.Custom
         {
             get
             {
-                var eih = from e in CoreAPI.Game.Player.Hand  orderby e.GetTag(GameTag.ZONE_POSITION) select e;
+                var eih = from e in CoreAPI.Game.Player.Hand orderby e.GetTag(GameTag.ZONE_POSITION) select e;
 
                 if (eih.All(e => e.HasTag(GameTag.ZONE_POSITION)))
                     eih = eih.OrderBy(e => e.GetTag(GameTag.ZONE_POSITION));
@@ -39,7 +39,7 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        IEnumerable<Entity> EntitiesInHandNoCoin => EntitiesInHand.Where(c => c.Info.CardMark != CardMark.Coin); 
+        IEnumerable<Entity> EntitiesInHandNoCoin => EntitiesInHand.Where(c => c.Info.CardMark != CardMark.Coin);
 
         enum ComparisonType { LessThan, LessThanEqual, Equal, GreaterThanEqual, GreaterThan };
 
@@ -54,7 +54,7 @@ namespace HDT.Plugins.Custom
             get
             {
                 var ccbc = new SortedDictionary<int, int>();
-          
+
                 foreach (Card c in PlayerCardList)
                 {
                     if (c.Count == 0)
@@ -70,6 +70,8 @@ namespace HDT.Plugins.Custom
             }
         }
 
+        bool IsMulliganPending => CoreAPI.Game.PlayerEntity.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+
         MulliganOddsView MulliganView { get; set; }
         CardInfoView CardView { get; set; }
         CardInfoViewModel CardInfoVM => (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
@@ -81,10 +83,6 @@ namespace HDT.Plugins.Custom
         {
             CardView = cv;
             MulliganView = mv;
-          //  CardInfoVM = (CardInfoViewModel)CardView.TryFindResource("CardInfoVM");
-           // MulliganOddsVM = (MulliganOddsViewModel)MulliganView.TryFindResource("MulliganOddsVM");
-
-       
         }
 
         void HideAll()
@@ -117,12 +115,12 @@ namespace HDT.Plugins.Custom
 
         internal void PlayerDraw(Card c)
         {
-           
             UpdateCardInformation();
         }
 
         internal void GameEnd()
         {
+            Reset();
             HideAll();
         }
 
@@ -141,7 +139,14 @@ namespace HDT.Plugins.Custom
 
         }
 
-        bool IsMulliganPending => CoreAPI.Game.PlayerEntity.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+        internal void Reset()
+        {
+            CardInfoVM.CardInfo.Clear();
+            MulliganOddsVM.MulliganCardOdds.Clear();
+            _mullUpdated = false;
+        }
+
+     
 
         void UpdateCardInformation()
         {
@@ -149,6 +154,7 @@ namespace HDT.Plugins.Custom
                 return;
 
             CardInfoVM.CardInfo.Clear();
+
             double runningTotal = 0;
             foreach (KeyValuePair<int, int> kv in DeckCardCountByCost)
             {

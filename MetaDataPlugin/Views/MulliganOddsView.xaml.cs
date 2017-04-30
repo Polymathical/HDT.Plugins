@@ -57,8 +57,8 @@ namespace HDT.Plugins.Custom.Controls
         {
             InitializeComponent();
 
-            //   DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
-            //   DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualHeightProperty, typeof(Canvas)).AddValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
         }
@@ -78,7 +78,7 @@ namespace HDT.Plugins.Custom.Controls
                 cardPositions = fourCardPositioning;
             else
             {
-                Debug.WriteLine("ListItemCount not equal to CardPositions Count");
+                Debug.WriteLine($"Card Count is {cardCount}");
                 return;
             }
             
@@ -114,6 +114,8 @@ namespace HDT.Plugins.Custom.Controls
 
         public void Dispose()
         {
+            DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Canvas)).RemoveValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Canvas)).RemoveValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Canvas)).RemoveValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualHeightProperty, typeof(Canvas)).RemoveValueChanged(CoreAPI.OverlayCanvas, UpdatePosition);
         }

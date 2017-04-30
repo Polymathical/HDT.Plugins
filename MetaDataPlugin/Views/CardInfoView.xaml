@@ -41,9 +41,9 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Column="0" BorderBrush="Transparent" Background="SteelBlue"  BorderThickness="0,0,1,1" />
+                    <Border Grid.Column="0" BorderBrush="Transparent" Background="SteelBlue" BorderThickness="0,0,1,1" />
                     <Border Grid.Column="1" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,1,1"  />
-                    <Border  Grid.Column="2" BorderBrush="Transparent" Background="Gray"   BorderThickness="0,0,0,1" />
+                    <Border Grid.Column="2" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,0,1" />
 
                     <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
                         <TextBlock.Effect>

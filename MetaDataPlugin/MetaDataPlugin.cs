@@ -79,7 +79,6 @@ namespace HDT.Plugins.Custom
 
         public void OnLoad()
         {
-
             var sourceControl = CoreAPI.OverlayCanvas;
           
             _cv = new CardInfoView();
@@ -109,6 +108,9 @@ namespace HDT.Plugins.Custom
         {
             CoreAPI.OverlayCanvas.Children.Remove(_cv);
             CoreAPI.OverlayCanvas.Children.Remove(_mv);
+            _cv = null;
+            _mv = null;
+            _metaDataPlugin = null;
         }
 
         public void OnUpdate()
