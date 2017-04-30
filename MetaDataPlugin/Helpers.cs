@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace HDT.Plugins.Custom
 {
@@ -31,7 +32,7 @@ namespace HDT.Plugins.Custom
 
             return (retX, retY);
         }
-         
+
         public static List<UIElement> GetUIElementsFromItemsControl(ItemsControl control)
         {
             List<UIElement> listItems = new List<UIElement>();
@@ -42,6 +43,8 @@ namespace HDT.Plugins.Custom
             }
             return listItems;
         }
-        public static bool InDesignMode=> (bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue);
+
+        public static bool InDesignMode => (bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue);
     }
+
 }

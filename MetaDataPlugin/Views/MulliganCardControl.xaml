@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Models="clr-namespace:HDT.Plugins.Custom.Models"
-             mc:Ignorable="d" FontSize="16" FontFamily="ChunkFive Roman" Foreground="White" >
+             mc:Ignorable="d" FontSize="16" FontFamily="ChunkFive Roman" Foreground="White">
     <Grid x:Name="MulliganCardGrid" Width="215">
+        <Grid.DataContext>
+            <Models:MulliganOddsModel/>
+        </Grid.DataContext>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -14,10 +17,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-        
+
         <Rectangle Fill="SteelBlue" Grid.Column="0" Grid.ColumnSpan="3" />
-        <TextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0" />
-        <TextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1" />
-        <TextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2" />
+        <TextBlock Text="{Binding LowerOdds, FallbackValue='12%'}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" /> 
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" />
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </UserControl>

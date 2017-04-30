@@ -45,9 +45,21 @@
                     <Border Grid.Column="1" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,1,1"  />
                     <Border  Grid.Column="2" BorderBrush="Transparent" Background="Gray"   BorderThickness="0,0,0,1" />
 
-                    <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" />
-                    <TextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  />
-                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center"   />
+                    <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
+                        </TextBlock.Effect>
+                    </TextBlock>
 
                     <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
                         <Rectangle.Fill>
