@@ -17,7 +17,7 @@ using HDT.Plugins.Custom.Models;
 using HDT.Plugins.Custom.ViewModels;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using HDT.Plugins.Custom.Controls;
- 
+
 
 namespace HDT.Plugins.Custom
 {
@@ -70,7 +70,20 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        bool IsMulliganPending => CoreAPI.Game.PlayerEntity.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+        bool IsMulliganPending
+        {
+            get
+            {
+                var player = CoreAPI.Game.Entities.FirstOrDefault(x => x.Value.IsPlayer);
+
+                if (player.Value == null)
+                    return false;
+                if (player.Value.HasTag(GameTag.MULLIGAN_STATE) == false)
+                    return false;
+
+                return player.Value.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+            }
+        }
 
         MulliganOddsView MulliganView { get; set; }
         CardInfoView CardView { get; set; }
@@ -146,7 +159,7 @@ namespace HDT.Plugins.Custom
             _mullUpdated = false;
         }
 
-     
+
 
         void UpdateCardInformation()
         {
@@ -171,7 +184,7 @@ namespace HDT.Plugins.Custom
                 MulliganView.Visibility = Visibility.Visible;
                 UpdateMulliganData();
             }
-            else if(CoreAPI.Game.IsMulliganDone)
+            else if (CoreAPI.Game.IsMulliganDone)
             {
                 MulliganView.Visibility = Visibility.Hidden;
             }
