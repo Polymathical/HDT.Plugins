@@ -181,8 +181,10 @@ namespace HDT.Plugins.Custom
 
             if (IsMulliganPending)
             {
-                MulliganView.Visibility = Visibility.Visible;
                 UpdateMulliganData();
+                MulliganView.UpdatePosition(new object(), new EventArgs());
+                MulliganView.Visibility = Visibility.Visible;
+
             }
             else if (CoreAPI.Game.IsMulliganDone)
             {

@@ -103,10 +103,5 @@ namespace HDT.Plugins.Custom.Controls
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
         }
-
-        private void DisplayList_LayoutUpdated(object sender, EventArgs e)
-        {
-            UpdatePosition(sender, e);
-        }
     }
 }

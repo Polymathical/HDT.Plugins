@@ -6,9 +6,6 @@
              xmlns:Models="clr-namespace:HDT.Plugins.Custom.Models"
              mc:Ignorable="d" FontSize="16" FontFamily="ChunkFive Roman" Foreground="White">
     <Grid x:Name="MulliganCardGrid" Width="215">
-        <Grid.DataContext>
-            <Models:MulliganOddsModel/>
-        </Grid.DataContext>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Rectangle Fill="SteelBlue" Grid.Column="0" Grid.ColumnSpan="3" />
-        <TextBlock Text="{Binding LowerOdds, FallbackValue='12%'}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
+        <TextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" /> 
             </TextBlock.Effect>
