@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:hdt="clr-namespace:Hearthstone_Deck_Tracker;assembly=HearthstoneDeckTracker"
-             
              mc:Ignorable="d" FontSize="16" FontFamily="ChunkFive Roman" Foreground="White">
     <Grid x:Name="MulliganCardGrid" Width="215">
         <Grid.ColumnDefinitions>
@@ -13,15 +12,15 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32" />
+            <RowDefinition Height="24" />
         </Grid.RowDefinitions>
 
         <Rectangle Fill="SteelBlue" Grid.Column="0" Grid.ColumnSpan="3" />
-        <hdt:OutlinedTextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
+        <hdt:OutlinedTextBlock Text="{Binding LowerOdds, FallbackValue='25%'}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
         </hdt:OutlinedTextBlock>
-        <hdt:OutlinedTextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1">
+        <hdt:OutlinedTextBlock Text="{Binding EqualOdds, FallbackValue='50%'}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1">
         </hdt:OutlinedTextBlock>
-        <hdt:OutlinedTextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2">
+        <hdt:OutlinedTextBlock Text="{Binding HigherOdds, FallbackValue='75%'}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2">
         </hdt:OutlinedTextBlock>
     </Grid>
 </UserControl>

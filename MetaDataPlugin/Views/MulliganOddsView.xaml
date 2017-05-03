@@ -22,7 +22,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:MulliganCardControl DataContext="{Binding Mode=OneWay}"/> 
+                <local:MulliganCardControl BorderThickness="1" BorderBrush="Black"  DataContext="{Binding Mode=OneWay}"/> 
                 <!--<Grid x:Name="MulliganGrid" Width="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="64"/>
