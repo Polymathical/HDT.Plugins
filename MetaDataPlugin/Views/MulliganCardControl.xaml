@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Models="clr-namespace:HDT.Plugins.Custom.Models"
+             xmlns:hdt="clr-namespace:Hearthstone_Deck_Tracker;assembly=HearthstoneDeckTracker"
+             
              mc:Ignorable="d" FontSize="16" FontFamily="ChunkFive Roman" Foreground="White">
     <Grid x:Name="MulliganCardGrid" Width="215">
         <Grid.ColumnDefinitions>
@@ -16,20 +17,11 @@
         </Grid.RowDefinitions>
 
         <Rectangle Fill="SteelBlue" Grid.Column="0" Grid.ColumnSpan="3" />
-        <TextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" /> 
-            </TextBlock.Effect>
-        </TextBlock>
-        <TextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1">
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" />
-            </TextBlock.Effect>
-        </TextBlock>
-        <TextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2">
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="1" BlurRadius="0" Color="Black" />
-            </TextBlock.Effect>
-        </TextBlock>
+        <hdt:OutlinedTextBlock Text="{Binding LowerOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="0">
+        </hdt:OutlinedTextBlock>
+        <hdt:OutlinedTextBlock Text="{Binding EqualOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="1">
+        </hdt:OutlinedTextBlock>
+        <hdt:OutlinedTextBlock Text="{Binding HigherOdds}" VerticalAlignment="Center" TextAlignment="Center" Grid.Column="2">
+        </hdt:OutlinedTextBlock>
     </Grid>
 </UserControl>

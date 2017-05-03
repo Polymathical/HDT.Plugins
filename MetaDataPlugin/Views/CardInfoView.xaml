@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HDT.Plugins.Custom.Controls"
+             xmlns:hdt="clr-namespace:Hearthstone_Deck_Tracker;assembly=HearthstoneDeckTracker"
              xmlns:ViewModels="clr-namespace:HDT.Plugins.Custom.ViewModels"
              xmlns:Converters="clr-namespace:HDT.Plugins.Custom.Converters"
              mc:Ignorable="d" Foreground="White" Background="Transparent" RenderTransformOrigin="0.5,0.5">
@@ -17,14 +17,6 @@
         <Converters:DoubleToPercentTextValueConverter x:Key="DoubleToPercentConverter" />
         <RotateTransform x:Key="TextTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
     </UserControl.Resources>
-    <UserControl.RenderTransform>
-        <TransformGroup>
-            <ScaleTransform ScaleX="1" ScaleY="1"/>
-            <SkewTransform/>
-            <RotateTransform/>
-            <TranslateTransform/>
-        </TransformGroup>
-    </UserControl.RenderTransform>
     <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0" RenderTransformOrigin="0.5,0.5">
         <ItemsControl.RenderTransform>
             <RotateTransform Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
@@ -45,21 +37,12 @@
                     <Border Grid.Column="1" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,1,1"  />
                     <Border Grid.Column="2" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,0,1" />
 
-                    <TextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="18" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="Black" />
-                        </TextBlock.Effect>
-                    </TextBlock>
+                    <hdt:OutlinedTextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="20" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    </hdt:OutlinedTextBlock>
+                    <hdt:OutlinedTextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    </hdt:OutlinedTextBlock>
+                    <hdt:OutlinedTextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center">
+                    </hdt:OutlinedTextBlock>
 
                     <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
                         <Rectangle.Fill>

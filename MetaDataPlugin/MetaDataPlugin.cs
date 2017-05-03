@@ -20,6 +20,8 @@ namespace HDT.Plugins.Custom
     public class MetaDataPlugin : IPlugin
     {
         private MetaDataPluginMain _metaDataPlugin;
+        CardInfoView _cv;
+        MulliganOddsView _mv;
 
         public string Author
         {
@@ -74,13 +76,8 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        CardInfoView _cv;
-        MulliganOddsView _mv;
-
         public void OnLoad()
         {
-            var sourceControl = CoreAPI.OverlayCanvas;
-          
             _cv = new CardInfoView();
             _mv = new MulliganOddsView();
             _cv.Hide();
@@ -131,6 +128,7 @@ namespace HDT.Plugins.Custom
                 _metaDataPlugin?.Update();
             }
         }
+
         void Show()
         {
             _mv.Visibility = _cv.Visibility = Visibility.Visible;

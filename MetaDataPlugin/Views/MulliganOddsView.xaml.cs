@@ -65,6 +65,7 @@ namespace HDT.Plugins.Custom.Controls
 
         public void UpdatePosition(object sender, EventArgs e)
         {
+        
             if (MulliganOddsVM == null)
                 return;
 
@@ -95,6 +96,7 @@ namespace HDT.Plugins.Custom.Controls
             {
                 var p = cardPositions[curItem];
                 (double x, double y) = Helpers.FromAbsoluteRefToOverlay(p.X, p.Y, CoreAPI.OverlayCanvas.ActualWidth, CoreAPI.OverlayCanvas.ActualHeight);
+                 
                 Canvas.SetTop(uie, y);
                 Canvas.SetLeft(uie, x);
                 curItem++;
