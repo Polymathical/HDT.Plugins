@@ -49,36 +49,15 @@ namespace HDT.Plugins.Custom
 
         List<Card> PlayerCardList => CoreAPI.Game.Player.PlayerCardList;
 
-        IDictionary<int, int> DeckCardCountByCost
-        {
-            get
-            {
-                var ccbc = new SortedDictionary<int, int>();
-
-                foreach (Card c in PlayerCardList)
-                {
-                    if (c.Count == 0)
-                        continue;
-
-                    if (ccbc.ContainsKey(c.Cost))
-                        ccbc[c.Cost] += c.Count;
-                    else
-                        ccbc.Add(c.Cost, c.Count);
-                }
-
-                return ccbc;
-            }
-        }
+        IDictionary<int, int> DeckCardCountByCost => (from c in PlayerCardList group c by c.Cost into costGroup select new { CardCost = costGroup.Key, CardCount = costGroup.Count() }).ToDictionary(k => k.CardCost, e=> e.CardCount);
 
         bool IsMulliganPending
         {
             get
             {
                 var player = CoreAPI.Game.Entities.FirstOrDefault(x => x.Value.IsPlayer);
-
-                if (player.Value == null)
-                    return false;
-                if (player.Value.HasTag(GameTag.MULLIGAN_STATE) == false)
+               
+                if (player.Value == null || !player.Value.HasTag(GameTag.MULLIGAN_STATE))
                     return false;
 
                 return player.Value.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
@@ -149,7 +128,6 @@ namespace HDT.Plugins.Custom
 
         internal void OpponentPlay(Card c)
         {
-
         }
 
         internal void Reset()
