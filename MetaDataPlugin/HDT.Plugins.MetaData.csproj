@@ -116,9 +116,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\mana-gem.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Hearthstone-Deck-Tracker\Hearthstone Deck Tracker\Hearthstone Deck Tracker.csproj">
       <Project>{e63a3f1c-e662-4e62-be43-af27cb9e953d}</Project>
       <Name>Hearthstone Deck Tracker</Name>
@@ -133,7 +130,9 @@
       <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
