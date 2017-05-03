@@ -60,10 +60,10 @@ namespace HDT.Plugins.Custom.Controls
         public CardInfoView()
         {
             InitializeComponent();
-         
+
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
+            //DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
 
 
         }
@@ -72,18 +72,18 @@ namespace HDT.Plugins.Custom.Controls
         {
             var panelLeft = DockPanel?.GetValue(Canvas.LeftProperty) as double?;
             var panelTop = DockPanel?.GetValue(Canvas.TopProperty) as double?;
-            var panelWidth = DockPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
+          //  var panelWidth = DockPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
 
-            if (DockPanel != null && panelLeft != null && panelTop is double)
+            var pixelPadding = 20;
+
+            if (panelLeft == null || panelTop == null)
             {
-                Canvas.SetTop(this, (double)panelTop + 1);
-                Canvas.SetLeft(this, (double)(panelLeft - panelWidth) + 5);
+                panelLeft = Core.OverlayWindow.ActualWidth;
+                panelTop = Core.OverlayWindow.Top + 20;
             }
-            else
-            {
-                Canvas.SetTop(this, Core.OverlayCanvas.Height * 25 / 100);
-                Canvas.SetLeft(this, Core.OverlayCanvas.Width * 20 / 100);
-            }
+
+            Canvas.SetLeft(this, (double)panelLeft - (this.ActualWidth + pixelPadding));
+            Canvas.SetTop(this, (double)panelTop + 1);
         }
 
         public void Show()
@@ -101,7 +101,7 @@ namespace HDT.Plugins.Custom.Controls
         {
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
-            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
+            //  DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).RemoveValueChanged(DockPanel, UpdatePosition);
         }
     }
 }

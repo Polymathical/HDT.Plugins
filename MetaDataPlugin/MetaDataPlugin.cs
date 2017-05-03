@@ -88,8 +88,6 @@ namespace HDT.Plugins.Custom
             CoreAPI.OverlayCanvas.Children.Add(_cv);
             CoreAPI.OverlayCanvas.Children.Add(_mv);
 
-            _cv.UpdatePosition(new object(), new EventArgs());
-
             GameEvents.OnGameStart.Add(_metaDataPlugin.GameStart);
             GameEvents.OnOpponentPlay.Add(_metaDataPlugin.OpponentPlay);
             GameEvents.OnPlayerPlay.Add(_metaDataPlugin.PlayerPlay);
