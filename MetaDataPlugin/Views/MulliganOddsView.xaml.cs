@@ -92,11 +92,8 @@ namespace HDT.Plugins.Custom.Controls
             }
 
             int curItem = 0;
-            foreach (UIElement uie in listItems)
+            foreach (UIElement uie in listItems.Where(li => li != null))
             {
-                if (uie == null)
-                    continue;
-
                 var p = cardPositions[curItem];
                 (double x, double y) = Helpers.FromAbsoluteRefToOverlay(p.X, p.Y, CoreAPI.OverlayCanvas.ActualWidth, CoreAPI.OverlayCanvas.ActualHeight);
                  
