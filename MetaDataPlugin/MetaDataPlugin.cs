@@ -23,6 +23,7 @@ namespace HDT.Plugins.Custom
         CardInfoView _cv;
         MulliganOddsView _mv;
 
+
         public string Author
         {
             get
@@ -63,11 +64,6 @@ namespace HDT.Plugins.Custom
             }
         }
 
-        public void OnButtonPress()
-        {
-
-        }
-
         public Version Version
         {
             get
@@ -76,12 +72,37 @@ namespace HDT.Plugins.Custom
             }
         }
 
+        static Window _settingsWindow { get; set; }
+
+        public void OnButtonPress()
+        {
+            if (_settingsWindow == null)
+            {
+                _settingsWindow = new MetaDataPluginSettingsView();
+                 
+                _settingsWindow.Closed += (sender, args) =>
+                {
+                    _settingsWindow = null;
+                };
+                _settingsWindow.Show();
+            }
+            else
+            {
+                _settingsWindow.Activate();
+            }
+
+        }
+
         public void OnLoad()
         {
+            MetaDataPluginSettings.Default.PropertyChanged += (sender, e) => MetaDataPluginSettings.Default.Save();
+
             _cv = new CardInfoView();
             _mv = new MulliganOddsView();
             _cv.Hide();
             _mv.Hide();
+
+            _cv.VerticalBars = MetaDataPluginSettings.Default.EnableVerticalCardInfoBars;
 
             _metaDataPlugin = new MetaDataPluginMain(_cv, _mv);
 
@@ -96,7 +117,6 @@ namespace HDT.Plugins.Custom
             GameEvents.OnPlayerMulligan.Add(_metaDataPlugin.PlayerMulligan);
             GameEvents.OnGameEnd.Add(_metaDataPlugin.GameEnd);
 
-          
         }
 
         public void OnUnload()
@@ -110,6 +130,7 @@ namespace HDT.Plugins.Custom
 
         public void OnUpdate()
         {
+            // todo: get rid of all update calls
             SetVisibility();
         }
 
@@ -123,6 +144,8 @@ namespace HDT.Plugins.Custom
             else
             {
                 Show();
+
+                // todo: get rid of update
                 _metaDataPlugin?.Update();
             }
         }

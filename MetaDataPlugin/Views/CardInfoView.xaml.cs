@@ -63,7 +63,7 @@ namespace HDT.Plugins.Custom.Controls
 
             DependencyPropertyDescriptor.FromProperty(Canvas.LeftProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
             DependencyPropertyDescriptor.FromProperty(Canvas.TopProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
-            //DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
+            DependencyPropertyDescriptor.FromProperty(Canvas.ActualWidthProperty, typeof(Border)).AddValueChanged(DockPanel, UpdatePosition);
 
 
         }
@@ -72,7 +72,7 @@ namespace HDT.Plugins.Custom.Controls
         {
             var panelLeft = DockPanel?.GetValue(Canvas.LeftProperty) as double?;
             var panelTop = DockPanel?.GetValue(Canvas.TopProperty) as double?;
-          //  var panelWidth = DockPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
+            var panelWidth = DockPanel?.GetValue(Canvas.ActualWidthProperty) as double?;
 
             var pixelPadding = 20;
 

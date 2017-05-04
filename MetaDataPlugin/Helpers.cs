@@ -13,8 +13,11 @@ namespace HDT.Plugins.Custom
 {
     public static class Helpers
     {
-        public static string ToPercentString(double d, int precision = 0, bool includePercentSign = true)
+        public static string ToPercentString(double d, int precision = 0, bool includePercentSign = true, bool round = false)
         {
+            if (round)
+                d = Math.Round(d, precision, MidpointRounding.AwayFromZero);
+
             var nfi = new NumberFormatInfo()
             {
                 PercentDecimalDigits = precision

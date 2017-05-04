@@ -49,12 +49,12 @@ namespace HDT.Plugins.Custom
 
         List<Card> PlayerCardList => CoreAPI.Game.Player.PlayerCardList;
 
-        IDictionary<int, int> DeckCardCountByCost => (from c in PlayerCardList group c by c.Cost into costGroup select new { CardCost = costGroup.Key, CardCount = costGroup.Count() }).ToDictionary(k => k.CardCost, e=> e.CardCount);
+        IDictionary<int, int> DeckCardCountByCost => (from c in PlayerCardList group c.Count by c.Cost into costGroup select new { CardCost = costGroup.Key, CardCount = costGroup.Sum() }).ToDictionary(k => k.CardCost, e=> e.CardCount);
 
         bool IsMulliganPending
         {
             get
-            {
+            { 
                 var player = CoreAPI.Game.Entities.FirstOrDefault(x => x.Value.IsPlayer);
                
                 if (player.Value == null || !player.Value.HasTag(GameTag.MULLIGAN_STATE))
@@ -176,11 +176,13 @@ namespace HDT.Plugins.Custom
 
         void UpdateMulliganData()
         {
-            if (_mullUpdated)
-                return;
-
             if (MulliganOddsVM == null)
                 return;
+
+            if (_mullUpdated && EntitiesInHandNoCoin.Count() == MulliganOddsVM.MulliganCardOdds.Count())
+                return;
+
+          
 
             MulliganOddsVM.MulliganCardOdds.Clear();
 
@@ -195,10 +197,8 @@ namespace HDT.Plugins.Custom
                 var lowerOdds = DeckCostStats(c.Cost, ComparisonType.LessThan) / cardsAfterReshuffle;
                 var equalOdds = DeckCostStats(c.Cost, ComparisonType.Equal, true) / cardsAfterReshuffle;
                 var higherOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThan) / cardsAfterReshuffle;
-                var lowerEqualOdds = DeckCostStats(c.Cost, ComparisonType.LessThanEqual) / cardsAfterReshuffle;
-                var higherEqualOdds = DeckCostStats(c.Cost, ComparisonType.GreaterThanEqual) / cardsAfterReshuffle;
 
-                var mom = new MulliganOddsModel(cardNumber, Helpers.ToPercentString(lowerOdds), Helpers.ToPercentString(equalOdds), Helpers.ToPercentString(higherOdds));
+                var mom = new MulliganOddsModel(cardNumber, Helpers.ToPercentString(d: lowerOdds), Helpers.ToPercentString(d: equalOdds), Helpers.ToPercentString(d: higherOdds));
                 MulliganOddsVM.MulliganCardOdds.Add(mom);
             }
             _mullUpdated = true;

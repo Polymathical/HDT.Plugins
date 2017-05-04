@@ -15,7 +15,7 @@
         <ViewModels:CardInfoViewModel x:Key="CardInfoVM" />
         <Converters:PercentageConverter x:Key="PercentageConverter" />
         <Converters:DoubleToPercentTextValueConverter x:Key="DoubleToPercentConverter" />
-        <RotateTransform x:Key="TextTransform" Angle="{Binding ElementName=CardViewControl, Path=ControlRotateAngle}" />
+        <RotateTransform x:Key="TextTransform" Angle="{Binding TextRotateAngle, ElementName=CardViewControl}" />
     </UserControl.Resources>
     <ItemsControl x:Name="ViewItems" Foreground="White" FontSize="16" FontFamily="ChunkFive Roman" ItemsSource="{Binding CardInfo}" Margin="0" RenderTransformOrigin="0.5,0.5">
         <ItemsControl.RenderTransform>
@@ -37,11 +37,21 @@
                     <Border Grid.Column="1" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,1,1"  />
                     <Border Grid.Column="2" BorderBrush="Transparent" Background="Gray" BorderThickness="0,0,0,1" />
 
-                    <hdt:OutlinedTextBlock Grid.Column="0" RenderTransform="{StaticResource TextTransform}" FontSize="20" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <hdt:OutlinedTextBlock Grid.Column="0" FontSize="20" Text="{Binding CardCost}"  VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <hdt:OutlinedTextBlock.RenderTransform>
+                            <RotateTransform Angle="{Binding ElementName=CardViewControl, Path=TextRotateAngle}" />
+                        </hdt:OutlinedTextBlock.RenderTransform>
                     </hdt:OutlinedTextBlock>
-                    <hdt:OutlinedTextBlock Grid.Column="1" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <hdt:OutlinedTextBlock Grid.Column="1" RenderTransformOrigin="0.5,0.5" x:Name="DrawPercentCol" FontSize="14" Panel.ZIndex="1" Text="{Binding CardDrawPercentText}" Margin="2,1,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <hdt:OutlinedTextBlock.RenderTransform>
+                            <RotateTransform Angle="{Binding ElementName=CardViewControl, Path=TextRotateAngle}" />
+                        </hdt:OutlinedTextBlock.RenderTransform>
                     </hdt:OutlinedTextBlock>
-                    <hdt:OutlinedTextBlock Grid.Column="2" RenderTransform="{StaticResource TextTransform}" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center">
+                    
+                    <hdt:OutlinedTextBlock Grid.Column="2" RenderTransformOrigin="0.5,0.5" FontSize="15" Text="{Binding CardDrawRunningTotalText}" VerticalAlignment="Center" TextAlignment="Center">
+                        <hdt:OutlinedTextBlock.RenderTransform>
+                            <RotateTransform Angle="{Binding ElementName=CardViewControl, Path=TextRotateAngle}" />
+                        </hdt:OutlinedTextBlock.RenderTransform>
                     </hdt:OutlinedTextBlock>
 
                     <Rectangle Grid.Column="1" Grid.ColumnSpan="2" Panel.ZIndex="0" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Opacity="0.75">
