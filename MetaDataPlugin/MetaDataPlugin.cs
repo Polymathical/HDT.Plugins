@@ -13,6 +13,7 @@ using Hearthstone_Deck_Tracker;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
 using HDT.Plugins.Custom.Controls;
 using System.ComponentModel;
+using System.Windows.Media;
 
 namespace HDT.Plugins.Custom
 {
@@ -79,9 +80,11 @@ namespace HDT.Plugins.Custom
             if (_settingsWindow == null)
             {
                 _settingsWindow = new MetaDataPluginSettingsView();
-                 
+               
                 _settingsWindow.Closed += (sender, args) =>
                 {
+                    MetaDataPluginSettings.Default.Save();
+                    RefreshSettings();
                     _settingsWindow = null;
                 };
                 _settingsWindow.Show();
@@ -93,16 +96,17 @@ namespace HDT.Plugins.Custom
 
         }
 
+        void RefreshSettings()
+        {
+            _cv.VerticalBars = MetaDataPluginSettings.Default.EnableVerticalCardInfoBars;
+        }
+
         public void OnLoad()
         {
-            MetaDataPluginSettings.Default.PropertyChanged += (sender, e) => MetaDataPluginSettings.Default.Save();
-
             _cv = new CardInfoView();
             _mv = new MulliganOddsView();
             _cv.Hide();
             _mv.Hide();
-
-            _cv.VerticalBars = MetaDataPluginSettings.Default.EnableVerticalCardInfoBars;
 
             _metaDataPlugin = new MetaDataPluginMain(_cv, _mv);
 

@@ -49,11 +49,9 @@ namespace HDT.Plugins.Custom.Controls
             set
             {
                 _verticalBars = value;
-                if (value != true)
-                    return;
 
-                ControlRotateAngle = -90;
-                TextRotateAngle = 90;
+                ControlRotateAngle = value ? -90 : 0;
+                TextRotateAngle = value ? 90 : 0;
             }
         }
 

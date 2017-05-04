@@ -182,8 +182,6 @@ namespace HDT.Plugins.Custom
             if (_mullUpdated && EntitiesInHandNoCoin.Count() == MulliganOddsVM.MulliganCardOdds.Count())
                 return;
 
-          
-
             MulliganOddsVM.MulliganCardOdds.Clear();
 
             int cardNumber = 0;

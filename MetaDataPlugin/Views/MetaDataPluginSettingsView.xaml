@@ -6,14 +6,25 @@
              xmlns:local="clr-namespace:HDT.Plugins.Custom"
              xmlns:hdt="clr-namespace:Hearthstone_Deck_Tracker;assembly=HearthstoneDeckTracker"
              mc:Ignorable="d" 
+             Width="300" Height="400"
+             ResizeMode="NoResize"
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <StackPanel>
-        <CheckBox Grid.Column="0" IsChecked="{Binding EnableVerticalCardInfoBars, Source={x:Static local:MetaDataPluginSettings.Default}}">
-            <TextBlock Grid.Column="1" FontSize="12" Text="Use Vertical Card Info Bars" />
+    <StackPanel Margin="6" >
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="0,0,0,12"/>
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="0,0,0,12"/>
+            </Style>
+        </StackPanel.Resources>
+        <CheckBox IsChecked="{Binding EnableVerticalCardInfoBars, Source={x:Static local:MetaDataPluginSettings.Default}}">
+            <TextBlock Text="Use Vertical Card Info Bars" />
         </CheckBox>
-        <Button Click="Button_Click" Width="40">
-            <TextBlock Text="Close" FontSize="12"/>
+        
+        <Button HorizontalAlignment="Left" Click="Button_Click" Width="40">
+            <TextBlock Text="Close" />
         </Button>
     </StackPanel>
     
