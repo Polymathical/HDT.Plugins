@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Enums;
 using Hearthstone_Deck_Tracker.Hearthstone;
 using Hearthstone_Deck_Tracker.Hearthstone.Entities;
 using CoreAPI = Hearthstone_Deck_Tracker.API.Core;
-using System.Collections.ObjectModel;
 using HearthDb.Enums;
-using System.ComponentModel;
 using System.Windows;
-using System.Text.RegularExpressions;
 using HDT.Plugins.Custom.Models;
 using HDT.Plugins.Custom.ViewModels;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using HDT.Plugins.Custom.Controls;
 
 
@@ -26,7 +20,7 @@ namespace HDT.Plugins.Custom
 
         #region Properties and Variables
 
-        IEnumerable<Entity> EntitiesInHand
+        IEnumerable<Hearthstone_Deck_Tracker.Hearthstone.Entities.Entity> EntitiesInHand
         {
             get
             {
@@ -49,18 +43,27 @@ namespace HDT.Plugins.Custom
 
         List<Card> PlayerCardList => CoreAPI.Game.Player.PlayerCardList;
 
-        IDictionary<int, int> DeckCardCountByCost => (from c in PlayerCardList group c.Count by c.Cost into costGroup select new { CardCost = costGroup.Key, CardCount = costGroup.Sum() }).ToDictionary(k => k.CardCost, e=> e.CardCount);
+        IDictionary<int, int> DeckCardCountByCost => (from c in PlayerCardList group c.Count by c.Cost into costGroup select new { CardCost = costGroup.Key, CardCount = costGroup.Sum() }).ToDictionary(k => k.CardCost, e => e.CardCount);
 
         bool IsMulliganPending
         {
             get
-            { 
-                var player = CoreAPI.Game.Entities.FirstOrDefault(x => x.Value.IsPlayer);
-               
-                if (player.Value == null || !player.Value.HasTag(GameTag.MULLIGAN_STATE))
-                    return false;
+            {
+                try
+                {
 
-                return player.Value.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+                    return !CoreAPI.Game.IsMulliganDone;
+                    //var player = CoreAPI.Game.Entities.FirstOrDefault(e => e.Value?.IsPlayer ?? false).Value;
+
+                    //if (player.HasTag(GameTag.MULLIGAN_STATE))
+                    //    return false;
+
+                    //return player.GetTag(GameTag.MULLIGAN_STATE) == (int)Mulligan.INPUT;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
 
@@ -159,6 +162,7 @@ namespace HDT.Plugins.Custom
 
             if (IsMulliganPending)
             {
+               
                 UpdateMulliganData();
                 MulliganView.UpdatePosition(new object(), new EventArgs());
                 MulliganView.Visibility = Visibility.Visible;
@@ -177,7 +181,10 @@ namespace HDT.Plugins.Custom
         void UpdateMulliganData()
         {
             if (MulliganOddsVM == null)
-                return;
+            {
+                Hearthstone_Deck_Tracker.Utility.Logging.Log.Warn("null", "MulliganOddsVM");
+            }
+                
 
             if (_mullUpdated && EntitiesInHandNoCoin.Count() == MulliganOddsVM.MulliganCardOdds.Count())
                 return;
